@@ -1,5 +1,7 @@
+import { Title } from '@mantine/core';
+
 function App() {
-  return <h1>App.jsx</h1>;
+  return <Title>App.jsx</Title>;
 }
 
 export default App;
