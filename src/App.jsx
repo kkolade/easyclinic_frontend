@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import AddDoctors from './components/AddDoctors';
 import Appointments from './components/Appointments';
 import Booking from './components/Booking';
@@ -9,13 +9,20 @@ function NoMatch() {
   return (
     <div style={{ padding: 20 }}>
       <h2>404: Page Not Found</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adip.</p>
+      <p>Please check the URL.</p>
     </div>
   );
 }
 
 const App = () => (
   <Router>
+    <nav>
+      <Link to='/'>Home</Link>
+      <Link to='/appointments'>Appointments</Link>
+      <Link to='/booking'>Booking</Link>
+      <Link to='/add-doctors'>Add Doctor</Link>
+      <Link to='/delete-doctors'>Delete Doctor</Link>
+    </nav>
     <Routes>
       <Route path='/' element={<Doctors />} />
       <Route path='/appointments' element={<Appointments />} />
