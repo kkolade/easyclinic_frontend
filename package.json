@@ -15,9 +15,11 @@
     "@emotion/react": "^11.11.1",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
+    "@reduxjs/toolkit": "^1.9.5",
     "@vitejs/plugin-react": "^4.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.1.2",
     "vite": "^4.4.5"
   },
   "devDependencies": {
