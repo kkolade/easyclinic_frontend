@@ -2,7 +2,7 @@
   "endOfLine": "lf",
   "semi": true,
   "singleQuote": true,
-  "jsxSingleQuote": true,
+  "jsxSingleQuote": false,
   "tabWidth": 2,
   "trailingComma": "all",
   "arrowParens": "always"
