@@ -8,6 +8,7 @@ import {
   rem,
 } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => (
   <Container fluid>
@@ -17,7 +18,7 @@ const NotFoundPage = () => (
         <Text c="dimmed" fz={rem(17)}>
           Sorry, the page you are looking for does not exist.
         </Text>
-        <Button component="a" href="/" sx={{ marginTop: rem(16) }}>
+        <Button component={Link} to="/" sx={{ marginTop: rem(16) }}>
           <IconChevronLeft size={rem(20)} />
           <Text fz={rem(15)} sx={{ marginLeft: rem(8) }}>
             Back to home

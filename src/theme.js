@@ -13,13 +13,7 @@ const themeOverride = {
       styles: {
         root: {
           padding: `0 ${rem(16)}`,
-        },
-      },
-    },
-    Text: {
-      styles: {
-        root: {
-          fontWeight: 'normal',
+          fontWeight: 500,
         },
       },
     },
