@@ -1,10 +1,22 @@
+import { rem } from '@mantine/core';
+
 /**
  * @type {import ('@mantine/core').MantineThemeOverride}
  */
 const themeOverride = {
-  fontFamily: 'Roboto, sans-serif',
+  fontFamily: 'Open Sans, sans-serif',
   headings: {
-    fontFamily: 'Alfa Slab One, cursive',
+    fontFamily: 'Raleway, sans-serif',
+  },
+  components: {
+    Button: {
+      styles: {
+        root: {
+          padding: `0 ${rem(16)}`,
+          fontWeight: 500,
+        },
+      },
+    },
   },
 };
 

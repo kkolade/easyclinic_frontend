@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPage should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="mantine-Container-root mantine-6jkqqi"
+  >
+    <div
+      class="mantine-Center-root mantine-1x99tkp"
+    >
+      <div
+        class="mantine-qtk8ny"
+      >
+        <h2
+          class="mantine-Text-root mantine-Title-root mantine-ci3f5c"
+        >
+          Not Found (404)
+        </h2>
+        <div
+          class="mantine-Text-root mantine-xheqkd"
+        >
+          Sorry, the page you are looking for does not exist.
+        </div>
+        <a
+          class="mantine-UnstyledButton-root mantine-Button-root mantine-1cflbei"
+          data-button="true"
+          href="/"
+          type="button"
+        >
+          <div
+            class="mantine-1wpc1xj mantine-Button-inner"
+          >
+            <span
+              class="mantine-1ryt1ht mantine-Button-label"
+            >
+              <svg
+                class="tabler-icon tabler-icon-chevron-left"
+                fill="none"
+                height="1.25rem"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="1.25rem"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 6l-6 6l6 6"
+                />
+              </svg>
+              <div
+                class="mantine-Text-root mantine-3y9j5z"
+              >
+                Back to home
+              </div>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

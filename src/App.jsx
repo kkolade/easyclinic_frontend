@@ -1,23 +1,26 @@
 import {
-  Link, Route, BrowserRouter as Router, Routes,
+  Link,
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation,
 } from 'react-router-dom';
 import AddDoctors from './components/AddDoctors';
 import Appointments from './components/Appointments';
 import Booking from './components/Booking';
 import DeleteDoctors from './components/DeleteDoctors';
 import Doctors from './components/Doctors';
+import NotFoundPage from './pages/NotFoundPage';
 
-function NoMatch() {
+const NavigationLinks = () => {
+  const location = useLocation();
+
+  if (location.pathname === '/404') {
+    return null;
+  }
+
   return (
-    <div>
-      <h2>404: Page Not Found</h2>
-      <p>Please check the URL.</p>
-    </div>
-  );
-}
-
-const App = () => (
-  <Router>
     <nav>
       <Link to="/">Home</Link>
       <Link to="/appointments">Appointments</Link>
@@ -25,13 +28,20 @@ const App = () => (
       <Link to="/add-doctors">Add Doctor</Link>
       <Link to="/delete-doctors">Delete Doctor</Link>
     </nav>
+  );
+};
+
+const App = () => (
+  <Router>
+    <NavigationLinks />
     <Routes>
       <Route path="/" element={<Doctors />} />
       <Route path="/appointments" element={<Appointments />} />
       <Route path="/booking" element={<Booking />} />
       <Route path="/add-doctors" element={<AddDoctors />} />
       <Route path="/delete-doctors" element={<DeleteDoctors />} />
-      <Route path="*" element={<NoMatch />} />
+      <Route path="/404" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate replace to="/404" />} />
     </Routes>
   </Router>
 );
