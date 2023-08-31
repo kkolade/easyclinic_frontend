@@ -2,19 +2,19 @@
  * @jest-environment jsdom
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import renderer from 'react-test-renderer';
 
 import NotFoundPage from '../../pages/NotFoundPage';
 
-it('renders correctly', () => {
-  const tree = renderer
-    .create(
+describe('NotFoundPage', () => {
+  it('should render correctly', () => {
+    const { asFragment } = render(
       <Router>
         <NotFoundPage />
       </Router>,
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
