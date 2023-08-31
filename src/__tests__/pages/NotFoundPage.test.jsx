@@ -1,16 +1,9 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-import { MemoryRouter as Router } from 'react-router-dom';
-
 import NotFoundPage from 'pages/NotFoundPage';
+import { render } from 'test-utils';
 
 describe('NotFoundPage', () => {
   it('should render correctly', () => {
-    const { asFragment } = render(
-      <Router>
-        <NotFoundPage />
-      </Router>,
-    );
+    const { asFragment } = render(<NotFoundPage />);
     expect(asFragment()).toMatchSnapshot();
   });
 });
