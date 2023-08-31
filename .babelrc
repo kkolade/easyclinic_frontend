@@ -3,5 +3,17 @@
     "@babel/preset-env",
     ["@babel/preset-react", { "runtime": "automatic" }]
   ],
-  "plugins": ["@babel/plugin-syntax-jsx"]
+  "plugins": [
+    "@babel/plugin-syntax-jsx",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src",
+          "components": "./src/components",
+          "pages": "./src/pages"
+        }
+      }
+    ]
+  ]
 }

@@ -6,7 +6,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import NotFoundPage from '../../pages/NotFoundPage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 describe('NotFoundPage', () => {
   it('should render correctly', () => {
