@@ -1,10 +1,6 @@
-/**
- * @jest-environment jsdom
- */
-
 import { render } from '@testing-library/react';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter as Router } from 'react-router-dom';
 
 import NotFoundPage from 'pages/NotFoundPage';
 
