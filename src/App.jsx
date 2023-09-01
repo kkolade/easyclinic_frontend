@@ -11,6 +11,7 @@ import Appointments from './components/Appointments';
 import Booking from './components/Booking';
 import DeleteDoctors from './components/DeleteDoctors';
 import Doctors from './components/Doctors';
+import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const NavigationLinks = () => {
@@ -35,7 +36,8 @@ const App = () => (
   <Router>
     <NavigationLinks />
     <Routes>
-      <Route path="/" element={<Doctors />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/doctors" element={<Doctors />} />
       <Route path="/appointments" element={<Appointments />} />
       <Route path="/booking" element={<Booking />} />
       <Route path="/add-doctors" element={<AddDoctors />} />
