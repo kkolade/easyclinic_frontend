@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom';
 
 import userEvent from '@testing-library/user-event';
-import NotFoundPage from 'pages/NotFoundPage';
 import { render } from 'test-utils';
+
+import NotFoundPage from 'pages/NotFoundPage';
 
 describe('NotFoundPage', () => {
   it('should render correctly', () => {

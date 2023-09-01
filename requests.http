@@ -1,0 +1,50 @@
+### Register a new user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "first_name": "Lisa",
+    "last_name": "Kudrow",
+    "phone_number": "+54 022 395",
+    "birthdate": "01-01-2002",
+    "username": "lkudrow",
+    "email": "lkudrow@test.com",
+    "password": "123456"
+}
+
+### Log in a registered user
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username": "bcooper",
+  "password": "123456"
+}
+
+### Retrieve logged-in user
+GET http://localhost:3000/auto_login
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
+
+### Get a list of all doctors
+GET http://localhost:3000/api/v1/doctors
+Accept: application/json
+
+### Create a reservation
+POST http://localhost:3000/api/v1/users/6/reservations
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
+
+{
+    "reservation_date": "28-08-2023",
+    "reservation_time": "18:00",
+    "status": true,
+    "user": 6,
+    "doctor_id": 2,
+    "clinic_id": 7
+}
+
+### Get all reservations of a user
+GET http://localhost:3000/api/v1/users/6/reservations
+Accept: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
