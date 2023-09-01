@@ -3,8 +3,7 @@ import React from 'react';
 
 const Doctors = () => (
   <div>
-    <Title>App.jsx</Title>
-    <h2>Home Page</h2>
+    <Title>Doctors</Title>
   </div>
 );
 

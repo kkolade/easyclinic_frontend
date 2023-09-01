@@ -6,13 +6,14 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import AddDoctors from './components/AddDoctors';
-import Appointments from './components/Appointments';
-import Booking from './components/Booking';
-import DeleteDoctors from './components/DeleteDoctors';
-import Doctors from './components/Doctors';
-import HomePage from './pages/HomePage';
-import NotFoundPage from './pages/NotFoundPage';
+
+import AddDoctors from 'components/AddDoctors';
+import Appointments from 'components/Appointments';
+import Booking from 'components/Booking';
+import DeleteDoctors from 'components/DeleteDoctors';
+import Doctors from 'components/Doctors';
+import HomePage from 'pages/HomePage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 const NavigationLinks = () => {
   const location = useLocation();
