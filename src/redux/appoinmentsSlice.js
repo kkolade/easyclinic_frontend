@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   appointments: [],
@@ -29,6 +29,20 @@ const appointmentsSlice = createSlice({
     addAppointment: (state, action) => {
       state.appointments.push(action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDoctorAppointments.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchDoctorAppointments.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.appointments = action.payload;
+      })
+      .addCase(fetchDoctorAppointments.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 
