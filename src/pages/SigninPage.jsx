@@ -2,10 +2,10 @@ import { Text } from '@mantine/core';
 
 import AppShell from 'components/AppShell';
 
-const HomePage = () => (
+const SigninPage = () => (
   <AppShell>
-    <Text>HomePage</Text>
+    <Text>SigninPage</Text>
   </AppShell>
 );
 
-export default HomePage;
+export default SigninPage;
