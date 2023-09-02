@@ -27,6 +27,11 @@ const SignupForm = () => {
       phone: '',
       birthDate: '',
     },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      confirmPassword: (value, values) => (value !== values.password ? 'Passwords did not match' : null),
+    },
   });
 
   return (
@@ -96,13 +101,14 @@ const SignupForm = () => {
             {...form.getInputProps('phone')}
           />
           <DateInput
+            valueFormat="DD-MM-YYYY"
             label="Birth Date"
             placeholder="Your birth date"
             required
             clearable
             {...form.getInputProps('birthDate')}
           />
-          <Button fullWidth type="submit" loading>
+          <Button fullWidth type="submit" loading={false}>
             Sign up
           </Button>
           <RouterLink to={-1} mt="md">
