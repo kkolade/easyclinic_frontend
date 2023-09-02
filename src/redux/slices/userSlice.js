@@ -3,8 +3,24 @@ import axios from 'axios';
 
 import { API_BASE_URL as BASE_URL } from 'utils/constants';
 
-export const userLogin = createAsyncThunk(
-  'user/login',
+export const userSignup = createAsyncThunk('user/signup', async (userData, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/signup`, userData, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    return {
+      user: response.data.user,
+      jwt: response.data.jwt,
+    };
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const userSignin = createAsyncThunk(
+  'user/signin',
   async ({ username, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
@@ -46,22 +62,38 @@ const userSlice = createSlice({
     userLogout: (state) => {
       state.user = null;
       state.jwt = null;
+      localStorage.removeItem('user');
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(userLogin.pending, (state) => {
+      .addCase(userSignin.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(userLogin.fulfilled, (state, action) => {
+      .addCase(userSignin.fulfilled, (state, action) => {
         localStorage.setItem('user', JSON.stringify(action.payload));
         state.loading = false;
         state.error = null;
         state.user = action.payload.user;
         state.jwt = action.payload.jwt;
       })
-      .addCase(userLogin.rejected, (state, action) => {
+      .addCase(userSignin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(userSignup.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(userSignup.fulfilled, (state, action) => {
+        localStorage.setItem('user', JSON.stringify(action.payload));
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload.user;
+        state.jwt = action.payload.jwt;
+      })
+      .addCase(userSignup.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
