@@ -15,6 +15,7 @@ const MainLink = ({
       to={path}
       label={label}
       icon={icon}
+      c="dark.3"
       variant="light"
       styles={{
         label: {

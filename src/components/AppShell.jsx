@@ -14,8 +14,8 @@ import { useState } from 'react';
 import MainLinks from './MainLinks';
 
 const MyAppShell = ({ children }) => {
-  const smScreen = useMediaQuery('(max-width: 48em)');
-  const lgScreen = useMediaQuery('(max-width: 75em)');
+  const mdScreenMin = useMediaQuery('(min-width: 62em)');
+  const lgScreenMax = useMediaQuery('(max-width: 75em)');
 
   const theme = useMantineTheme();
 
@@ -25,9 +25,14 @@ const MyAppShell = ({ children }) => {
     <AppShell
       navbar={(
         <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }} py="md">
-          {!smScreen && (
+          {mdScreenMin && (
             <Navbar.Section>
-              <Image width={lgScreen ? 150 : 200} mx="auto" src="/logo.png" alt="EasyClinic Logo" />
+              <Image
+                width={lgScreenMax ? 150 : 200}
+                mx="auto"
+                src="/logo.png"
+                alt="EasyClinic Logo"
+              />
             </Navbar.Section>
           )}
           <Navbar.Section grow>
@@ -45,7 +50,7 @@ const MyAppShell = ({ children }) => {
         </Navbar>
       )}
       header={
-        smScreen && (
+        !mdScreenMin && (
           <Header height={{ base: 50 }} p="md">
             <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
