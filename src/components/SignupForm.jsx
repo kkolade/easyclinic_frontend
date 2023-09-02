@@ -32,6 +32,13 @@ const SignupForm = () => {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
       confirmPassword: (value, values) => (value !== values.password ? 'Passwords did not match' : null),
     },
+
+    transformValues: (values) => {
+      const { birthDate } = values;
+      return {
+        birthDate: `${birthDate.getDate()}-${birthDate.getMonth() + 1}-${birthDate.getFullYear()}`,
+      };
+    },
   });
 
   return (
@@ -101,7 +108,6 @@ const SignupForm = () => {
             {...form.getInputProps('phone')}
           />
           <DateInput
-            valueFormat="DD-MM-YYYY"
             label="Birth Date"
             placeholder="Your birth date"
             required
