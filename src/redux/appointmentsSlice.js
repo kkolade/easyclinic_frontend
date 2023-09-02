@@ -18,6 +18,19 @@ export const fetchAppointments = createAsyncThunk('appointments/fetchAppointment
   return data;
 });
 
+export const fetchDoctorDetails = createAsyncThunk(
+  'doctors/fetchDoctorDetails',
+  async (doctorId) => {
+    const response = await fetch(`http://localhost:3000/api/v1/doctors/${doctorId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  },
+);
+
 const appointmentsSlice = createSlice({
   name: 'appointments',
   initialState,
