@@ -1,14 +1,9 @@
 import {
-  Button,
-  Center,
-  Container,
-  Flex,
-  Text,
-  Title,
-  rem,
+  Center, Container, Flex, Text, Title, rem,
 } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
+
+import RouterButton from 'components/RouterButton';
 
 const NotFoundPage = () => (
   <Container fluid>
@@ -20,12 +15,12 @@ const NotFoundPage = () => (
         <Text c="dimmed" fz={rem(17)} align="center">
           Sorry, the page you are looking for does not exist.
         </Text>
-        <Button component={Link} to="/" sx={{ marginTop: rem(16) }}>
+        <RouterButton to="/" sx={{ marginTop: rem(16) }}>
           <IconChevronLeft size={rem(20)} />
           <Text fz={rem(15)} sx={{ marginLeft: rem(8) }}>
             Back to home
           </Text>
-        </Button>
+        </RouterButton>
       </Flex>
     </Center>
   </Container>
