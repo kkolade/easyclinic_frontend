@@ -17,8 +17,8 @@ export const userLogin = createAsyncThunk(
         },
       );
       return {
-        user: response.data,
-        jwt: response.headers.authorization,
+        user: response.data.user,
+        jwt: response.data.jwt,
       };
     } catch (error) {
       return rejectWithValue(error.response.data);
