@@ -9,7 +9,7 @@ const RouterButton = ({ to, children, ...rest }) => (
 );
 
 RouterButton.propTypes = {
-  to: PropTypes.string.isRequired,
+  to: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   children: PropTypes.node.isRequired,
 };
 
