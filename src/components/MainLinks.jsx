@@ -1,60 +1,11 @@
-import { Box, NavLink, useMantineTheme } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
 import { IconHome, IconLogin, IconLogout } from '@tabler/icons-react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { userSignout } from '../redux/slices/userSlice';
 import { selectUser } from '../redux/store';
-
-const NavigationLink = ({
-  icon, label, path, active,
-}) => {
-  const theme = useMantineTheme();
-
-  return (
-    <NavLink
-      component={Link}
-      to={path}
-      label={label}
-      icon={icon}
-      tt="uppercase"
-      c="dark.3"
-      variant="light"
-      styles={{
-        label: {
-          fontSize: theme.fontSizes.md,
-          fontWeight: 700,
-        },
-      }}
-      active={active}
-    />
-  );
-};
-
-const NavigationButton = ({ icon, label, onClick }) => {
-  const theme = useMantineTheme();
-
-  return (
-    <NavLink
-      component="button"
-      type="button"
-      label={label}
-      icon={icon}
-      tt="uppercase"
-      c="dark.3"
-      variant="light"
-      styles={{
-        label: {
-          fontSize: theme.fontSizes.md,
-          fontWeight: 700,
-        },
-      }}
-      onClick={onClick}
-    />
-  );
-};
+import NavigationButton from './NavigationButton';
+import NavigationLink from './NavigationLink';
 
 const navigationLinks = [{ icon: <IconHome />, label: 'Home', path: '/' }];
 const signedInLinks = [];
@@ -62,7 +13,6 @@ const signedOutLinks = [{ icon: <IconLogin />, label: 'Sign in', path: '/signin'
 const adminLinks = [];
 
 const MainLinks = () => {
-  const smScreen = useMediaQuery('(max-width: 48em)');
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -84,7 +34,7 @@ const MainLinks = () => {
   });
 
   return (
-    <Box mt={smScreen ? 0 : 'xl'}>
+    <div>
       {links}
       {user && (
         <NavigationButton
@@ -93,25 +43,8 @@ const MainLinks = () => {
           onClick={() => dispatch(userSignout())}
         />
       )}
-    </Box>
+    </div>
   );
-};
-
-NavigationLink.defaultProps = {
-  active: false,
-};
-
-NavigationLink.propTypes = {
-  icon: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
-  active: PropTypes.bool,
-};
-
-NavigationButton.propTypes = {
-  icon: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default MainLinks;

@@ -18,6 +18,7 @@ import MainLinks from './MainLinks';
 
 const MyAppShell = ({ children }) => {
   const mdScreenMin = useMediaQuery('(min-width: 62em)');
+  const smScreenMax = useMediaQuery('(max-width: 48em)');
   const lgScreenMax = useMediaQuery('(max-width: 75em)');
   const theme = useMantineTheme();
 
@@ -30,7 +31,7 @@ const MyAppShell = ({ children }) => {
       navbar={(
         <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }} py="md">
           {mdScreenMin && (
-            <Navbar.Section>
+            <Navbar.Section mb="md">
               <Image
                 width={lgScreenMax ? 150 : 200}
                 mx="auto"
@@ -40,8 +41,8 @@ const MyAppShell = ({ children }) => {
             </Navbar.Section>
           )}
           {user && (
-            <Navbar.Section mt="xl">
-              <Text align="center" fw="500">
+            <Navbar.Section mb="md">
+              <Text align="center" fw="600">
                 Welcome,
                 {' '}
                 {user.first_name}
@@ -64,7 +65,7 @@ const MyAppShell = ({ children }) => {
         </Navbar>
       )}
       header={
-        !mdScreenMin && (
+        smScreenMax && (
           <Header height={{ base: 50 }} p="md">
             <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
