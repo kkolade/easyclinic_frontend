@@ -78,7 +78,7 @@ const userSlice = createSlice({
         state.jwt = jwt;
       }
     },
-    userLogout: (state) => {
+    userSignout: (state) => {
       state.user = null;
       state.jwt = null;
       removeUserAndJwtFromLocalStorage();
@@ -119,6 +119,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { loadUserFromLocalStorage, userLogout } = userSlice.actions;
+export const { loadUserFromLocalStorage, userSignout } = userSlice.actions;
 
 export default userSlice.reducer;
