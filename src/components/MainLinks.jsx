@@ -1,6 +1,6 @@
 import { Box, NavLink, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconHome, IconLogin, IconLogout } from '@tabler/icons-react';
+import { IconHome, IconLogin } from '@tabler/icons-react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -33,7 +33,7 @@ const MainLink = ({
 };
 
 const navigationLinks = [{ icon: <IconHome />, label: 'Home', path: '/' }];
-const signedInLinks = [{ icon: <IconLogout />, label: 'Sign out', path: '/signout' }];
+const signedInLinks = [];
 const signedOutLinks = [{ icon: <IconLogin />, label: 'Sign in', path: '/signin' }];
 const adminLinks = [];
 
@@ -59,11 +59,15 @@ const MainLinks = () => {
   return <Box mt={smScreen ? 0 : 'xl'}>{links}</Box>;
 };
 
+MainLink.defaultProps = {
+  active: false,
+};
+
 MainLink.propTypes = {
   icon: PropTypes.node.isRequired,
   label: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
 };
 
 export default MainLinks;
