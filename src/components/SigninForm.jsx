@@ -3,19 +3,15 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconAlertCircle } from '@tabler/icons-react';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import RouterLink from 'components/RouterLink';
 import { userSignin } from '../redux/slices/userSlice';
-import { selectUser, selectUserError, selectUserLoading } from '../redux/store';
+import { selectUserError, selectUserLoading } from '../redux/store';
 
 const SigninForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const user = useSelector(selectUser);
   const loading = useSelector(selectUserLoading);
   const error = useSelector(selectUserError);
 
@@ -29,12 +25,6 @@ const SigninForm = () => {
   const handleSubmit = (values) => {
     dispatch(userSignin(values));
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
 
   return (
     <Flex align="center" justify="center" h="100%">

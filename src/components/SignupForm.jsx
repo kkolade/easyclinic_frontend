@@ -13,19 +13,15 @@ import {
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconAlertCircle, IconChevronLeft } from '@tabler/icons-react';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import RouterLink from 'components/RouterLink';
 import { userSignup } from '../redux/slices/userSlice';
-import { selectUser, selectUserError, selectUserLoading } from '../redux/store';
+import { selectUserError, selectUserLoading } from '../redux/store';
 
 const SignupForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const user = useSelector(selectUser);
   const loading = useSelector(selectUserLoading);
   const error = useSelector(selectUserError);
 
@@ -58,12 +54,6 @@ const SignupForm = () => {
   const handleSubmit = (values) => {
     dispatch(userSignup(values));
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
 
   return (
     <Flex align="center" justify="center" h="100%">

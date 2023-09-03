@@ -2,7 +2,21 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import camelToSnakeCase from 'utils/camelToSnakeCase';
-import { API_BASE_URL as BASE_URL } from 'utils/constants';
+import {
+  API_BASE_URL as BASE_URL,
+  LOCAL_STORAGE_JWT_KEY,
+  LOCAL_STORAGE_USER_KEY,
+} from 'utils/constants';
+
+const saveUserAndJwtToLocalStorage = (user, jwt) => {
+  localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
+  localStorage.setItem(LOCAL_STORAGE_JWT_KEY, jwt);
+};
+
+const removeUserAndJwtFromLocalStorage = () => {
+  localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
+  localStorage.removeItem(LOCAL_STORAGE_JWT_KEY);
+};
 
 export const userSignup = createAsyncThunk('user/signup', async (userData, { rejectWithValue }) => {
   try {
@@ -57,7 +71,7 @@ const userSlice = createSlice({
   },
   reducers: {
     loadUserFromLocalStorage: (state) => {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY));
       const jwt = localStorage.getItem('jwt');
       if (user && jwt) {
         state.user = user;
@@ -67,7 +81,7 @@ const userSlice = createSlice({
     userLogout: (state) => {
       state.user = null;
       state.jwt = null;
-      localStorage.removeItem('user');
+      removeUserAndJwtFromLocalStorage();
     },
   },
   extraReducers(builder) {
@@ -77,7 +91,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(userSignin.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload));
+        saveUserAndJwtToLocalStorage(action.payload.user, action.payload.jwt);
         state.loading = false;
         state.error = null;
         state.user = action.payload.user;
@@ -92,7 +106,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(userSignup.fulfilled, (state, action) => {
-        localStorage.setItem('user', JSON.stringify(action.payload));
+        saveUserAndJwtToLocalStorage(action.payload.user, action.payload.jwt);
         state.loading = false;
         state.error = null;
         state.user = action.payload.user;
