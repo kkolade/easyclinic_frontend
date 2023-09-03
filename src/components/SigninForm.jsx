@@ -37,15 +37,15 @@ const SigninForm = () => {
   }, [user, navigate]);
 
   return (
-    <Flex align="center" justify="center" h="85%">
+    <Flex align="center" justify="center" h="100%">
       <Box component="form" onSubmit={form.onSubmit(handleSubmit)} w="100%" maw={600}>
         <Flex direction="column" gap="sm">
-          <Title order={3} c="dark.3" tt="uppercase">
+          <Title order={3} c="dark.3" tt="uppercase" mb="sm">
             Sign in
           </Title>
           {error && (
             <Alert icon={<IconAlertCircle size="1rem" />} color="red" variant="outline">
-              {error[Object.keys(error)[0]]}
+              {error}
             </Alert>
           )}
           <div>

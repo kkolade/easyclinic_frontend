@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import camelToSnakeCase from 'utils/camelToSnakeCase';
 import { API_BASE_URL as BASE_URL } from 'utils/constants';
 
 export const userSignup = createAsyncThunk('user/signup', async (userData, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${BASE_URL}/signup`, userData, {
+    const response = await axios.post(`${BASE_URL}/users`, camelToSnakeCase(userData), {
       headers: {
         Accept: 'application/json',
       },
@@ -15,7 +16,11 @@ export const userSignup = createAsyncThunk('user/signup', async (userData, { rej
       jwt: response.data.jwt,
     };
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    const errorMessages = error.response.data.errors.map((e, i) => ({
+      id: i,
+      message: e,
+    }));
+    return rejectWithValue(errorMessages);
   }
 });
 
@@ -37,7 +42,7 @@ export const userSignin = createAsyncThunk(
         jwt: response.data.jwt,
       };
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response.data.failure);
     }
   },
 );

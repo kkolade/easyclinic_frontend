@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Center,
@@ -11,11 +12,23 @@ import {
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
-import { IconChevronLeft } from '@tabler/icons-react';
+import { IconAlertCircle, IconChevronLeft } from '@tabler/icons-react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import RouterLink from 'components/RouterLink';
+import { userSignup } from '../redux/slices/userSlice';
+import { selectUser, selectUserError, selectUserLoading } from '../redux/store';
 
 const SignupForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector(selectUser);
+  const loading = useSelector(selectUserLoading);
+  const error = useSelector(selectUserError);
+
   const form = useForm({
     initialValues: {
       firstName: '',
@@ -24,8 +37,8 @@ const SignupForm = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      phone: '',
-      birthDate: '',
+      phoneNumber: '',
+      birthdate: '',
     },
 
     validate: {
@@ -34,25 +47,37 @@ const SignupForm = () => {
     },
 
     transformValues: (values) => {
-      const { birthDate } = values;
+      const { birthdate } = values;
       return {
-        birthDate: `${birthDate.getDate()}-${birthDate.getMonth() + 1}-${birthDate.getFullYear()}`,
+        ...values,
+        birthdate: `${birthdate.getDate()}-${birthdate.getMonth() + 1}-${birthdate.getFullYear()}`,
       };
     },
   });
 
+  const handleSubmit = (values) => {
+    dispatch(userSignup(values));
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
   return (
-    <Flex align="center" justify="center" h="85%">
-      <Box
-        component="form"
-        onSubmit={form.onSubmit((values) => console.log(values))}
-        w="100%"
-        maw={600}
-      >
+    <Flex align="center" justify="center" h="100%">
+      <Box component="form" onSubmit={form.onSubmit(handleSubmit)} w="100%" maw={600}>
         <Flex direction="column" gap="sm">
-          <Title order={3} c="dark.3" tt="uppercase">
+          <Title order={3} c="dark.3" tt="uppercase" mb="sm">
             Sign up
           </Title>
+          {error
+            && error.map(({ id, message }) => (
+              <Alert key={id} icon={<IconAlertCircle size="1rem" />} color="red" variant="outline">
+                {message}
+              </Alert>
+            ))}
           <Group grow noWrap={false} spacing="xs">
             <TextInput
               label="First Name"
@@ -105,16 +130,17 @@ const SignupForm = () => {
             label="Phone"
             placeholder="Your phone number"
             required
-            {...form.getInputProps('phone')}
+            {...form.getInputProps('phoneNumber')}
           />
           <DateInput
             label="Birth Date"
             placeholder="Your birth date"
+            maxDate={new Date()}
             required
             clearable
-            {...form.getInputProps('birthDate')}
+            {...form.getInputProps('birthdate')}
           />
-          <Button fullWidth type="submit" loading={false}>
+          <Button fullWidth type="submit" loading={loading}>
             Sign up
           </Button>
           <RouterLink to={-1} mt="md">
