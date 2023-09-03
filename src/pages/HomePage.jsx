@@ -32,56 +32,58 @@ const HomePage = () => {
           <Title>Your Health, Our Priority</Title>
           <Text fw="500">Book your appointment today!</Text>
         </Box>
-        <Carousel
-          slideSize="33.333333%"
-          breakpoints={[
-            { maxWidth: 'sm', slideSize: '100%' },
-            { maxWidth: 'md', slideSize: '50%' },
-          ]}
-          slideGap="xs"
-          align="start"
-          slidesToScroll={1}
-          controlsOffset="sm"
-          controlSize={40}
-          maw="100%"
-          loop
-          styles={(theme) => ({
-            control: {
-              backgroundColor: theme.colors.blue[2],
-            },
-          })}
-        >
-          {doctors.map((doctor) => (
-            <Carousel.Slide key={doctor.id}>
-              <Flex direction="column">
-                <RouterLink
-                  to={`/doctors/${doctor.id}`}
-                  c="dark.3"
-                  sx={{
-                    '&:hover': {
-                      textDecoration: 'none',
-                    },
-                  }}
-                >
-                  <Avatar
-                    src={doctor.photo}
-                    alt={doctor.name}
-                    radius="50%"
-                    size={200}
-                    mb="md"
-                    mx="auto"
-                  />
-                  <Title align="center" order={3}>
-                    {doctor.name}
-                  </Title>
-                </RouterLink>
-                <Text c="gray.6" align="center">
-                  {doctor.bio}
-                </Text>
-              </Flex>
-            </Carousel.Slide>
-          ))}
-        </Carousel>
+        {doctors.length > 0 && (
+          <Carousel
+            slideSize="33.333333%"
+            breakpoints={[
+              { maxWidth: 'sm', slideSize: '100%' },
+              { maxWidth: 'md', slideSize: '50%' },
+            ]}
+            slideGap="xs"
+            align="start"
+            slidesToScroll={1}
+            controlsOffset="sm"
+            controlSize={40}
+            maw="100%"
+            loop
+            styles={(theme) => ({
+              control: {
+                backgroundColor: theme.colors.blue[2],
+              },
+            })}
+          >
+            {doctors.map((doctor) => (
+              <Carousel.Slide key={doctor.id}>
+                <Flex direction="column">
+                  <RouterLink
+                    to={`/doctors/${doctor.id}`}
+                    c="dark.3"
+                    sx={{
+                      '&:hover': {
+                        textDecoration: 'none',
+                      },
+                    }}
+                  >
+                    <Avatar
+                      src={doctor.photo}
+                      alt={doctor.name}
+                      radius="50%"
+                      size={200}
+                      mb="md"
+                      mx="auto"
+                    />
+                    <Title align="center" order={3}>
+                      {doctor.name}
+                    </Title>
+                  </RouterLink>
+                  <Text c="gray.6" align="center">
+                    {doctor.bio}
+                  </Text>
+                </Flex>
+              </Carousel.Slide>
+            ))}
+          </Carousel>
+        )}
       </Flex>
     </AppShell>
   );
