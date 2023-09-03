@@ -17,10 +17,9 @@ import { selectUser } from '../redux/store';
 import MainLinks from './MainLinks';
 
 const MyAppShell = ({ children }) => {
-  const mdScreenMin = useMediaQuery('(min-width: 62em)');
-  const smScreenMax = useMediaQuery('(max-width: 48em)');
-  const lgScreenMax = useMediaQuery('(max-width: 75em)');
   const theme = useMantineTheme();
+  const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const largeScreen = useMediaQuery(`(max-width: ${theme.breakpoints.lg})`);
 
   const [opened, setOpened] = useState(false);
 
@@ -30,10 +29,10 @@ const MyAppShell = ({ children }) => {
     <AppShell
       navbar={(
         <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }} py="md">
-          {mdScreenMin && (
+          {!smallScreen && (
             <Navbar.Section mb="md">
               <Image
-                width={lgScreenMax ? 150 : 200}
+                width={largeScreen ? 150 : 200}
                 mx="auto"
                 src="/logo.png"
                 alt="EasyClinic Logo"
@@ -65,7 +64,7 @@ const MyAppShell = ({ children }) => {
         </Navbar>
       )}
       header={
-        smScreenMax && (
+        smallScreen && (
           <Header height={{ base: 50 }} p="md">
             <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
