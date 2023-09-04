@@ -3,16 +3,20 @@ import {
 } from '@mantine/core';
 import { DateInput, TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
+import { useDidUpdate } from '@mantine/hooks';
 import { IconCalendarEvent, IconClock } from '@tabler/icons-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import AlertError from 'components/AlertError';
+import AlertSuccess from 'components/AlertSuccess';
 import AppShell from 'components/AppShell';
 import CustomSelect from 'components/CustomSelect';
 import { createAppointment } from '../redux/slices/appointmentsSlice';
 import { getClinics } from '../redux/slices/clinicsSlice';
 import { getDoctors } from '../redux/slices/doctorsSlice';
 import {
+  selectAppointments,
   selectAppointmentsError,
   selectClinics,
   selectClinicsLoading,
@@ -23,6 +27,7 @@ import {
 const BookAppointmentPage = () => {
   const dispatch = useDispatch();
 
+  const appointments = useSelector(selectAppointments);
   const appointmentsError = useSelector(selectAppointmentsError);
   const clinics = useSelector(selectClinics);
   const clinicsLoading = useSelector(selectClinicsLoading);
@@ -43,14 +48,18 @@ const BookAppointmentPage = () => {
 
     transformValues: (values) => {
       const { reservationDate } = values;
+      const date = reservationDate.getDate();
+      const month = reservationDate.getMonth() + 1;
+      const year = reservationDate.getFullYear();
+
       return {
         ...values,
-        reservationDate: `${reservationDate.getDate()}-${
-          reservationDate.getMonth() + 1
-        }-${reservationDate.getFullYear()}`,
+        reservationDate: `${year}-${month}-${date}`,
       };
     },
   });
+
+  const [appointmentsUpdated, setAppointmentsUpdated] = useState(false);
 
   const handleSubmit = (values) => {
     dispatch(createAppointment(values));
@@ -61,6 +70,11 @@ const BookAppointmentPage = () => {
     dispatch(getDoctors());
   }, [dispatch]);
 
+  useDidUpdate(() => {
+    console.log('udpated');
+    setAppointmentsUpdated(true);
+  }, [appointments]);
+
   if (clinicsLoading || doctorsLoading) {
     return (
       <AppShell>
@@ -70,8 +84,6 @@ const BookAppointmentPage = () => {
       </AppShell>
     );
   }
-
-  console.log(appointmentsError);
 
   return (
     <AppShell>
@@ -84,6 +96,11 @@ const BookAppointmentPage = () => {
         </Box>
         <Box component="form" onSubmit={form.onSubmit(handleSubmit)} w="100%" maw={600}>
           <Flex direction="column" gap="sm">
+            {appointmentsError
+              && appointmentsError.map(({ id, message }) => (
+                <AlertError key={id}>{message}</AlertError>
+              ))}
+            {appointmentsUpdated && <AlertSuccess>Done!</AlertSuccess>}
             <CustomSelect
               label="Select doctor"
               placeholder="Choose a Doctor"

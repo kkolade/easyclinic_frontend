@@ -35,7 +35,11 @@ export const createAppointment = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      const errorMessages = error.response.data.errors.map((e, i) => ({
+        id: i,
+        message: e,
+      }));
+      return rejectWithValue(errorMessages);
     }
   },
 );

@@ -1,13 +1,13 @@
 import {
-  Alert, Box, Button, Flex, PasswordInput, Text, TextInput, Title,
+  Box, Button, Flex, PasswordInput, Text, TextInput, Title,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconAlertCircle } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import RouterLink from 'components/RouterLink';
 import { userSignin } from '../redux/slices/userSlice';
 import { selectUserError, selectUserLoading } from '../redux/store';
+import AlertError from './AlertError';
+import RouterLink from './RouterLink';
 
 const SigninForm = () => {
   const dispatch = useDispatch();
@@ -33,11 +33,7 @@ const SigninForm = () => {
           <Title order={3} c="dark.3" tt="uppercase" mb="sm">
             Sign in
           </Title>
-          {error && (
-            <Alert icon={<IconAlertCircle size="1rem" />} color="red" variant="outline">
-              {error}
-            </Alert>
-          )}
+          {error && <AlertError>{error}</AlertError>}
           <div>
             <TextInput
               label="Username"
