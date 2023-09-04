@@ -1,35 +1,34 @@
-import { Avatar, Badge, Group, ScrollArea, Table, Text } from '@mantine/core';
+import {
+  Avatar, Badge, Group, ScrollArea, Table, Text,
+} from '@mantine/core';
+import PropTypes from 'prop-types';
 
 export function AppointmentsList({ data }) {
   const rows = data.map((doctor) => (
-    <tr key={doctor.name}>
+    <tr key={doctor.id}>
       <td>
         <Group spacing="sm">
-          <Avatar size={30} src={doctor.avatar} radius={30} />
-          <Text fz="sm" fw={500}>
-            {doctor.name}
-          </Text>
+          <Avatar src={doctor.avatar} radius="50%" />
+          <Text fw={500}>{doctor.name}</Text>
         </Group>
       </td>
       <td>
         <Badge color="cyan" variant="outline">
-          {doctor.specialty}
+          {doctor.experience}
+          + years
         </Badge>
       </td>
       <td>
-        <Text fz="sm" c="dimmed">
-          {doctor.clinic}
-        </Text>
+        <Text c="dimmed">{doctor.clinic}</Text>
       </td>
       <td>
-        <Text fz="sm" c="dimmed">
-          {doctor.reservation_date}
-        </Text>
+        <Text c="dimmed">{doctor.location}</Text>
       </td>
       <td>
-        <Text fz="sm" c="dimmed">
-          {doctor.reservation_time}
-        </Text>
+        <Text c="dimmed">{doctor.date}</Text>
+      </td>
+      <td>
+        <Text c="dimmed">{doctor.time}</Text>
       </td>
     </tr>
   ));
@@ -37,13 +36,14 @@ export function AppointmentsList({ data }) {
   if (!data.length) return null;
 
   return (
-    <ScrollArea>
-      <Table withBorder>
+    <ScrollArea maw="100%">
+      <Table verticalSpacing="md" fontSize="md" sx={{ minWidth: 800 }}>
         <thead>
           <tr>
             <th>Doctor</th>
-            <th>Specialty</th>
+            <th>Experience</th>
             <th>Clinic</th>
+            <th>Location</th>
             <th>Date</th>
             <th>Time</th>
           </tr>
@@ -53,5 +53,19 @@ export function AppointmentsList({ data }) {
     </ScrollArea>
   );
 }
+
+AppointmentsList.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      avatar: PropTypes.string.isRequired,
+      experience: PropTypes.number.isRequired,
+      clinic: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default AppointmentsList;
