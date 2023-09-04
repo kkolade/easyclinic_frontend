@@ -40,7 +40,7 @@ const AppointmentBookedAlert = () => (
   </AlertSuccess>
 );
 
-const BookAppointmentForm = () => {
+const AppointmentForm = () => {
   const dispatch = useDispatch();
 
   const appointments = useSelector(selectAppointments);
@@ -166,4 +166,4 @@ const BookAppointmentForm = () => {
   );
 };
 
-export default BookAppointmentForm;
+export default AppointmentForm;
