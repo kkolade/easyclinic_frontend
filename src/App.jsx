@@ -23,8 +23,6 @@ const App = () => {
   const user = useSelector(selectUser);
   const userLoading = useSelector(selectUserLoading);
 
-  console.log(userLoading);
-
   useEffect(() => {
     dispatch(loadUserFromLocalStorage());
   }, [dispatch]);

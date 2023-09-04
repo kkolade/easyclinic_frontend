@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { API_URL, LOCAL_STORAGE_JWT_KEY, LOCAL_STORAGE_USER_KEY } from 'utils/constants';
 
-const userId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY)).id;
+const userId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY))?.id;
 const authorizationToken = `bearer ${localStorage.getItem(LOCAL_STORAGE_JWT_KEY)}`;
 const appointmentsUrl = `${API_URL}/users/${userId}/reservations`;
 
