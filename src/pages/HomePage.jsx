@@ -2,6 +2,7 @@ import { Carousel } from '@mantine/carousel';
 import {
   Avatar, Box, Flex, Loader, Text, Title,
 } from '@mantine/core';
+import { useDocumentTitle } from '@mantine/hooks';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,6 +12,8 @@ import { getDoctors } from '../redux/slices/doctorsSlice';
 import { selectDoctors, selectDoctorsLoading } from '../redux/store';
 
 const HomePage = () => {
+  useDocumentTitle('EasyClinic');
+
   const dispatch = useDispatch();
 
   const doctors = useSelector(selectDoctors);
