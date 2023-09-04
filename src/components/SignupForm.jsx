@@ -39,8 +39,7 @@ const SignupForm = () => {
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      confirmPassword: (value, values) =>
-        value !== values.password ? 'Passwords did not match' : null,
+      confirmPassword: (value, values) => (value !== values.password ? 'Passwords did not match' : null),
     },
 
     transformValues: (values) => {
@@ -63,8 +62,8 @@ const SignupForm = () => {
           <Title order={3} c="dark.3" tt="uppercase" mb="sm">
             Sign up
           </Title>
-          {error &&
-            error.map(({ id, message }) => (
+          {error
+            && error.map(({ id, message }) => (
               <Alert key={id} icon={<IconAlertCircle size="1rem" />} color="red" variant="outline">
                 {message}
               </Alert>
