@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import ProtectedRoute from './components/ProtectedRoutes';
-import AddDoctorPage from './pages/AddDoctorPage';
-import BookAppointmentPage from './pages/BookAppointmentPage';
-import DeleteDoctorsPage from './pages/DeleteDoctorsPage';
-import DoctorDetailsPage from './pages/DoctorDetailsPage';
-import HomePage from './pages/HomePage';
-import MyAppointmentsPage from './pages/MyAppointmentsPage';
-import NotFoundPage from './pages/NotFoundPage';
-import SigninPage from './pages/SigninPage';
-import SignupPage from './pages/SignupPage';
+import {
+  AddDoctorPage,
+  BookAppointmentPage,
+  DeleteDoctorsPage,
+  DoctorDetailsPage,
+  HomePage,
+  MyAppointmentsPage,
+  NotFoundPage,
+  SigninPage,
+  SignupPage,
+} from './pages';
 import { loadUserFromLocalStorage } from './redux/slices/userSlice';
 import { selectUser } from './redux/store';
 
