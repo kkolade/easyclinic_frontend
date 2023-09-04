@@ -1,5 +1,5 @@
 import {
-  Box, Button, Center, Flex, Group, Loader, Text, Title,
+  Box, Button, Center, Flex, Group, Text, Title,
 } from '@mantine/core';
 import { DateInput, TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
@@ -21,7 +21,7 @@ import {
 } from '../redux/store';
 import AlertError from './AlertError';
 import AlertSuccess from './AlertSuccess';
-import AppShell from './AppShell';
+import AppShellLoader from './AppShellLoader';
 import CustomSelect from './CustomSelect';
 import RouterLink from './RouterLink';
 
@@ -88,15 +88,7 @@ const BookAppointmentForm = () => {
     },
   });
 
-  if (clinicsLoading || doctorsLoading) {
-    return (
-      <AppShell>
-        <Flex align="center" justify="center" h="100%">
-          <Loader />
-        </Flex>
-      </AppShell>
-    );
-  }
+  if (clinicsLoading || doctorsLoading) return <AppShellLoader />;
 
   return (
     <Flex direction="column" align="center" justify="center" rowGap="xl" h="100%">

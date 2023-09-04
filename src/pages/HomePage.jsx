@@ -1,12 +1,13 @@
 import { Carousel } from '@mantine/carousel';
 import {
-  Avatar, Box, Flex, Loader, Text, Title,
+  Avatar, Box, Flex, Text, Title,
 } from '@mantine/core';
 import { useDocumentTitle } from '@mantine/hooks';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppShell from 'components/AppShell';
+import AppShellLoader from 'components/AppShellLoader';
 import RouterLink from 'components/RouterLink';
 import { getDoctors } from '../redux/slices/doctorsSlice';
 import { selectDoctors, selectDoctorsLoading } from '../redux/store';
@@ -23,15 +24,7 @@ const HomePage = () => {
     dispatch(getDoctors());
   }, [dispatch]);
 
-  if (loading) {
-    return (
-      <AppShell>
-        <Flex align="center" justify="center" h="100%">
-          <Loader />
-        </Flex>
-      </AppShell>
-    );
-  }
+  if (loading) <AppShellLoader />;
 
   return (
     <AppShell>
