@@ -50,7 +50,7 @@ Accept: application/json
 ### Delete a doctor
 DELETE http://localhost:3000/api/v1/doctors/2
 Accept: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.V0z1TcfuH6MgWtsXxcz0cejD1e6ES3lvfF6uqtU6CAg
 
 ### Get a list of all clinics
 GET http://localhost:3000/api/v1/clinics

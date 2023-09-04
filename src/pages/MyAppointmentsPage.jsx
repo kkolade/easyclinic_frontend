@@ -25,6 +25,7 @@ const MyAppointmentsPage = () => {
   const transformedAppointments = useMemo(
     () => appointments.map((appointment) => ({
       id: appointment.id,
+      name: appointment.doctor.name,
       avatar: appointment.doctor.photo,
       experience: Number(appointment.doctor.experience_years) || 1,
       clinic: appointment.clinic.name,

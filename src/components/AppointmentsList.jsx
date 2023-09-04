@@ -13,7 +13,7 @@ export function AppointmentsList({ data }) {
         </Group>
       </td>
       <td>
-        <Badge color="cyan" variant="outline">
+        <Badge color="indigo.3" variant="outline">
           {doctor.experience}
           + years
         </Badge>
@@ -58,6 +58,7 @@ AppointmentsList.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired,
       experience: PropTypes.number.isRequired,
       clinic: PropTypes.string.isRequired,

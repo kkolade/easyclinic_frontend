@@ -33,6 +33,22 @@ export const createDoctor = createAsyncThunk(
   },
 );
 
+export const deleteDoctor = createAsyncThunk(
+  'doctors/deleteDoctor',
+  async (doctorId, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`${API_URL}/doctors/${doctorId}`, {
+        headers: {
+          Authorization: `bearer ${getJwtFromLocalStorage()}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.statusText);
+    }
+  },
+);
+
 const doctorsSlice = createSlice({
   name: 'doctors',
   initialState: {
