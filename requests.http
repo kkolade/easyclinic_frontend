@@ -3,13 +3,13 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "first_name": "Lisa",
-    "last_name": "Kudrow",
-    "phone_number": "+54 022 395",
-    "birthdate": "01-01-2002",
-    "username": "lkudrow",
-    "email": "lkudrow@test.com",
-    "password": "123456"
+  "first_name": "Lisa",
+  "last_name": "Kudrow",
+  "phone_number": "+54 022 395",
+  "birthdate": "01-01-2002",
+  "username": "lkudrow",
+  "email": "lkudrow@test.com",
+  "password": "123456"
 }
 
 ### Log in a registered user
@@ -36,12 +36,12 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
 
 {
-    "reservation_date": "28-08-2023",
-    "reservation_time": "18:00",
-    "status": true,
-    "user": 6,
-    "doctor_id": 2,
-    "clinic_id": 7
+  "reservation_date": "28-08-2023",
+  "reservation_time": "18:00",
+  "status": true,
+  "user": 6,
+  "doctor_id": 2,
+  "clinic_id": 7
 }
 
 ### Get all reservations of a user

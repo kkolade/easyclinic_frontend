@@ -1,11 +1,16 @@
-import { Text } from '@mantine/core';
+import { useDocumentTitle } from '@mantine/hooks';
 
 import AppShell from 'components/AppShell';
+import SigninForm from 'components/SigninForm';
 
-const SigninPage = () => (
-  <AppShell>
-    <Text>SigninPage</Text>
-  </AppShell>
-);
+const SigninPage = () => {
+  useDocumentTitle('Sign in | EasyClinic');
+
+  return (
+    <AppShell>
+      <SigninForm />
+    </AppShell>
+  );
+};
 
 export default SigninPage;

@@ -11,23 +11,42 @@ import {
 import { useMediaQuery } from '@mantine/hooks';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { selectUser } from '../redux/store';
 import MainLinks from './MainLinks';
 
 const MyAppShell = ({ children }) => {
-  const smScreen = useMediaQuery('(max-width: 48em)');
-  const lgScreen = useMediaQuery('(max-width: 75em)');
-
   const theme = useMantineTheme();
+  const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const largeScreen = useMediaQuery(`(max-width: ${theme.breakpoints.lg})`);
 
   const [opened, setOpened] = useState(false);
+
+  const user = useSelector(selectUser);
 
   return (
     <AppShell
       navbar={(
         <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }} py="md">
-          {!smScreen && (
-            <Navbar.Section>
-              <Image width={lgScreen ? 150 : 200} mx="auto" src="/logo.png" alt="EasyClinic Logo" />
+          {!smallScreen && (
+            <Navbar.Section mb="md">
+              <Image
+                width={largeScreen ? 150 : 200}
+                mx="auto"
+                src="/logo.png"
+                alt="EasyClinic Logo"
+              />
+            </Navbar.Section>
+          )}
+          {user && (
+            <Navbar.Section mb="md">
+              <Text align="center" fw="600">
+                Welcome,
+                {' '}
+                {user.first_name}
+                !
+              </Text>
             </Navbar.Section>
           )}
           <Navbar.Section grow>
@@ -45,7 +64,7 @@ const MyAppShell = ({ children }) => {
         </Navbar>
       )}
       header={
-        smScreen && (
+        smallScreen && (
           <Header height={{ base: 50 }} p="md">
             <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
