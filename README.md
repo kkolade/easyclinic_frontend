@@ -126,6 +126,23 @@ To run the project, execute the following command:
 - LinkedIn: [kolakolade](https://linkedin.com/in/kolakolade)
 - Twitter: [kola_kolade](https://twitter.com/kola_kolade)
 
+👤 **Federica Ulzurrun**
+
+- GitHub: [@federicaulzurrun](https://github.com/federicaulzurrun)
+- LinkedIn: [Federica Ulzurrun](https://www.linkedin.com/in/federicaulzurrun/)
+- Twitter: [@ulzurrunfede](https://mobile.twitter.com/ulzurrunfede)
+
+👤 **Eric Antwi**
+
+- GitHub: [@Mylo16](https://github.com/Mylo16)
+- LinkedIn: [ericopokuantwi](https://www.linkedin.com/in/ericopokuantwi/)
+- Twitter: [@EricAntwi384](https://twitter.com/EricAntwi384)
+  👤 **Oscar Villagran**
+
+- GitHub: [@oovillagran](https://github.com/oovillagran)
+- LinkedIn: [Oscar Villagran](https://www.linkedin.com/in/oovillagran/)
+- Twitter: [@oovillagran](https://twitter.com/oovillagran)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
