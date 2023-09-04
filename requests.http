@@ -26,11 +26,27 @@ GET http://localhost:3000/auto_login
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
 
+### FIX: Create a new doctor
+POST http://localhost:3000/api/v1/doctors
+Content-Type: application/json
+Authorization:
+
+{}
+
 ### Get a list of all doctors
 GET http://localhost:3000/api/v1/doctors
 Accept: application/json
 
-### Create a reservation
+### Get a doctor by id
+GET http://localhost:3000/api/v1/doctors/1
+Accept: application/json
+
+### FIX: Delete a doctor
+DELETE http://localhost:3000/api/v1/doctors/2
+Accept: application/json
+Authorization:
+
+### Create an appointment
 POST http://localhost:3000/api/v1/users/6/reservations
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
@@ -44,7 +60,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM
   "clinic_id": 7
 }
 
-### Get all reservations of a user
+### Get all appointments of a user
 GET http://localhost:3000/api/v1/users/6/reservations
 Accept: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
