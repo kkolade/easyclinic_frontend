@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import ProtectedRoute from './components/ProtectedRoutes';
+import ProtectedRoute from './components/ProtectedRoute';
 import {
   AddDoctorPage,
   BookAppointmentPage,
@@ -15,16 +15,21 @@ import {
   SignupPage,
 } from './pages';
 import { loadUserFromLocalStorage } from './redux/slices/userSlice';
-import { selectUser } from './redux/store';
+import { selectUser, selectUserLoading } from './redux/store';
 
 const App = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
+  const userLoading = useSelector(selectUserLoading);
+
+  console.log(userLoading);
 
   useEffect(() => {
     dispatch(loadUserFromLocalStorage());
   }, [dispatch]);
+
+  if (userLoading) return null;
 
   return (
     <Routes>
@@ -34,7 +39,7 @@ const App = () => {
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Route>
-      <Route element={<ProtectedRoute isAllowed={user} />}>
+      <Route element={<ProtectedRoute isAllowed={!!user} />}>
         <Route path="/book-appointment" element={<BookAppointmentPage />} />
         <Route path="/appointments" element={<MyAppointmentsPage />} />
       </Route>

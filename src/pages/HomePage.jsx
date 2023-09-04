@@ -20,13 +20,18 @@ const HomePage = () => {
     dispatch(getDoctors());
   }, [dispatch]);
 
-  return (
-    <AppShell>
-      {loading && (
+  if (loading) {
+    return (
+      <AppShell>
         <Flex align="center" justify="center" h="100%">
           <Loader />
         </Flex>
-      )}
+      </AppShell>
+    );
+  }
+
+  return (
+    <AppShell>
       <Flex direction="column" align="center" justify="center" rowGap="xl" h="100%">
         <Box sx={{ textAlign: 'center' }} mb="xl">
           <Title>Your Health, Our Priority</Title>

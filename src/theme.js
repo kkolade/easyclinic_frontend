@@ -8,6 +8,7 @@ const themeOverride = {
   headings: {
     fontFamily: 'Raleway, sans-serif',
   },
+  loader: 'bars',
   components: {
     Button: {
       styles: {
