@@ -46,6 +46,11 @@ DELETE http://localhost:3000/api/v1/doctors/2
 Accept: application/json
 Authorization:
 
+### Get a list of all clinics
+GET http://localhost:3000/api/v1/clinics
+Accept: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2fQ.dnjqXrQ8HWQnIiSMoM-Yt66LbXidwwtdvo2hcXoQBMU
+
 ### Create an appointment
 POST http://localhost:3000/api/v1/users/6/reservations
 Content-Type: application/json
