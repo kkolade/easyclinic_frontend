@@ -8,12 +8,14 @@ import { IconArrowRight, IconCalendarEvent, IconClock } from '@tabler/icons-reac
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import camelToSnakeCase from 'utils/camelToSnakeCase';
 import { createAppointment } from '../redux/slices/appointmentsSlice';
 import { getClinics } from '../redux/slices/clinicsSlice';
 import { getDoctors } from '../redux/slices/doctorsSlice';
 import {
   selectAppointments,
   selectAppointmentsError,
+  selectAppointmentsLoading,
   selectClinics,
   selectClinicsLoading,
   selectDoctors,
@@ -42,6 +44,7 @@ const BookAppointmentForm = () => {
   const dispatch = useDispatch();
 
   const appointments = useSelector(selectAppointments);
+  const appointmentsLoading = useSelector(selectAppointmentsLoading);
   const appointmentsError = useSelector(selectAppointmentsError);
   const clinics = useSelector(selectClinics);
   const clinicsLoading = useSelector(selectClinicsLoading);
@@ -51,7 +54,7 @@ const BookAppointmentForm = () => {
   const [appointmentsUpdated, setAppointmentsUpdated] = useState(false);
 
   const handleSubmit = (values) => {
-    dispatch(createAppointment(values));
+    dispatch(createAppointment(camelToSnakeCase(values)));
   };
 
   useEffect(() => {
@@ -127,7 +130,7 @@ const BookAppointmentForm = () => {
             }) => ({
               key: id,
               label: doctorName,
-              description: `${city}, ${address}`,
+              description: `${address}, ${city}`,
               value: id,
             }))}
             {...form.getInputProps('clinicId')}
@@ -154,7 +157,7 @@ const BookAppointmentForm = () => {
               {...form.getInputProps('reservationTime')}
             />
           </Group>
-          <Button fullWidth type="submit" loading={false}>
+          <Button fullWidth type="submit" loading={appointmentsLoading}>
             Book appointment
           </Button>
         </Flex>

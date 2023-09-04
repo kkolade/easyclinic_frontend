@@ -33,7 +33,7 @@ const SigninForm = () => {
           <Title order={3} c="dark.3" tt="uppercase" mb="sm">
             Sign in
           </Title>
-          {error && <AlertError>{error}</AlertError>}
+          {error && <AlertError>{error.message}</AlertError>}
           <div>
             <TextInput
               label="Username"

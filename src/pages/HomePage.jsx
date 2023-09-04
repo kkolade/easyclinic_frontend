@@ -24,7 +24,7 @@ const HomePage = () => {
     dispatch(getDoctors());
   }, [dispatch]);
 
-  if (loading) <AppShellLoader />;
+  if (loading) return <AppShellLoader />;
 
   return (
     <AppShell>

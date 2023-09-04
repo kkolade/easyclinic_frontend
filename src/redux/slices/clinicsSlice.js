@@ -3,19 +3,16 @@ import axios from 'axios';
 
 import { API_URL, LOCAL_STORAGE_JWT_KEY } from 'utils/constants';
 
-const authorizationToken = `bearer ${localStorage.getItem(LOCAL_STORAGE_JWT_KEY)}`;
-const clinicsUrl = `${API_URL}/clinics`;
-
 export const getClinics = createAsyncThunk('clinics/getClinics', async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.get(clinicsUrl, {
+    const response = await axios.get(`${API_URL}/clinics`, {
       headers: {
-        Authorization: authorizationToken,
+        Authorization: `bearer ${localStorage.getItem(LOCAL_STORAGE_JWT_KEY)}`,
       },
     });
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue(error.response.statusText);
   }
 });
 
