@@ -1,11 +1,14 @@
-import { Avatar, Box, Button, Flex, Group, Loader, Select, Text, Title } from '@mantine/core';
+import {
+  Box, Button, Flex, Group, Loader, Text, Title,
+} from '@mantine/core';
 import { DateInput, TimeInput } from '@mantine/dates';
 import { useForm } from '@mantine/form';
 import { IconCalendarEvent, IconClock } from '@tabler/icons-react';
-import { forwardRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppShell from 'components/AppShell';
+import CustomSelect from 'components/CustomSelect';
 import { getClinics } from '../redux/slices/clinicsSlice';
 import { getDoctors } from '../redux/slices/doctorsSlice';
 import {
@@ -14,20 +17,6 @@ import {
   selectDoctors,
   selectDoctorsLoading,
 } from '../redux/store';
-
-const SelectItem = forwardRef(({ image, label, description, ...others }, ref) => (
-  <div ref={ref} {...others}>
-    <Group noWrap>
-      {image && <Avatar radius="50%" src={image} />}
-      <div>
-        <Text size="sm">{label}</Text>
-        <Text size="xs" opacity={0.65}>
-          {description}
-        </Text>
-      </div>
-    </Group>
-  </div>
-));
 
 const BookAppointmentPage = () => {
   const dispatch = useDispatch();
@@ -40,8 +29,8 @@ const BookAppointmentPage = () => {
 
   const form = useForm({
     initialValues: {
-      doctor: '', // may need to change
-      clinic: '', // may need to change
+      doctor: '',
+      clinic: '',
       date: new Date(),
       time: new Date().toLocaleTimeString('en-US', {
         hour12: false,
@@ -49,18 +38,26 @@ const BookAppointmentPage = () => {
         minute: '2-digit',
       }),
     },
+
+    transformValues: (values) => {
+      const { date } = values;
+      return {
+        ...values,
+        date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+      };
+    },
   });
 
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = () => {
+    // todo: handle form submit
   };
 
   useEffect(() => {
     dispatch(getClinics());
     dispatch(getDoctors());
-  }, []);
+  }, [dispatch]);
 
-  if (clinicsLoading || doctorsLoading)
+  if (clinicsLoading || doctorsLoading) {
     return (
       <AppShell>
         <Flex align="center" justify="center" h="100%">
@@ -68,6 +65,7 @@ const BookAppointmentPage = () => {
         </Flex>
       </AppShell>
     );
+  }
 
   return (
     <AppShell>
@@ -80,47 +78,33 @@ const BookAppointmentPage = () => {
         </Box>
         <Box component="form" onSubmit={form.onSubmit(handleSubmit)} w="100%" maw={600}>
           <Flex direction="column" gap="sm">
-            <Select
+            <CustomSelect
               label="Select doctor"
               placeholder="Choose a Doctor"
-              itemComponent={SelectItem}
-              data={doctors.map(({ id, name, photo, specialty }) => ({
+              data={doctors.map(({
+                id, name, photo, specialty,
+              }) => ({
                 key: id,
                 label: name,
                 description: specialty?.name ?? '',
                 image: photo,
                 value: name,
               }))}
-              withAsterisk={false}
-              required
-              searchable
-              filter={(value, item) =>
-                item.label.toLowerCase().includes(value.toLowerCase().trim()) ||
-                item.description.toLowerCase().includes(value.toLowerCase().trim())
-              }
               {...form.getInputProps('doctor')}
             />
-            <Select
+            <CustomSelect
               label="Select clinic"
               placeholder="Choose a Clinic"
-              itemComponent={SelectItem}
-              data={clinics.map(({ id, name: doctorName, city, address }) => ({
+              data={clinics.map(({
+                id, name: doctorName, city, address,
+              }) => ({
                 key: id,
                 label: doctorName,
                 description: `${city}, ${address}`,
-                image: null,
                 value: doctorName,
               }))}
-              withAsterisk={false}
-              required
-              searchable
-              filter={(value, item) =>
-                item.label.toLowerCase().includes(value.toLowerCase().trim()) ||
-                item.description.toLowerCase().includes(value.toLowerCase().trim())
-              }
               {...form.getInputProps('clinic')}
             />
-
             <Group grow noWrap={false} spacing="xs">
               <DateInput
                 description="Appointment Date"
