@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import camelToSnakeCase from 'utils/camelToSnakeCase';
 import { API_URL, LOCAL_STORAGE_JWT_KEY, LOCAL_STORAGE_USER_KEY } from 'utils/constants';
 
 const userId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY))?.id;
@@ -27,7 +28,7 @@ export const createAppointment = createAsyncThunk(
   'appointments/createAppointment',
   async (appointmentData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(appointmentsUrl, appointmentData, {
+      const response = await axios.post(appointmentsUrl, camelToSnakeCase(appointmentData), {
         headers: {
           Authorization: authorizationToken,
         },

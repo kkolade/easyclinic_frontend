@@ -9,9 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import AppShell from 'components/AppShell';
 import CustomSelect from 'components/CustomSelect';
+import { createAppointment } from '../redux/slices/appointmentsSlice';
 import { getClinics } from '../redux/slices/clinicsSlice';
 import { getDoctors } from '../redux/slices/doctorsSlice';
 import {
+  selectAppointmentsError,
   selectClinics,
   selectClinicsLoading,
   selectDoctors,
@@ -21,18 +23,18 @@ import {
 const BookAppointmentPage = () => {
   const dispatch = useDispatch();
 
+  const appointmentsError = useSelector(selectAppointmentsError);
   const clinics = useSelector(selectClinics);
   const clinicsLoading = useSelector(selectClinicsLoading);
-
   const doctors = useSelector(selectDoctors);
   const doctorsLoading = useSelector(selectDoctorsLoading);
 
   const form = useForm({
     initialValues: {
-      doctor: '',
-      clinic: '',
-      date: new Date(),
-      time: new Date().toLocaleTimeString('en-US', {
+      doctorId: null,
+      clinicId: null,
+      reservationDate: new Date(),
+      reservationTime: new Date().toLocaleTimeString('en-US', {
         hour12: false,
         hour: '2-digit',
         minute: '2-digit',
@@ -40,16 +42,18 @@ const BookAppointmentPage = () => {
     },
 
     transformValues: (values) => {
-      const { date } = values;
+      const { reservationDate } = values;
       return {
         ...values,
-        date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+        reservationDate: `${reservationDate.getDate()}-${
+          reservationDate.getMonth() + 1
+        }-${reservationDate.getFullYear()}`,
       };
     },
   });
 
-  const handleSubmit = () => {
-    // todo: handle form submit
+  const handleSubmit = (values) => {
+    dispatch(createAppointment(values));
   };
 
   useEffect(() => {
@@ -66,6 +70,8 @@ const BookAppointmentPage = () => {
       </AppShell>
     );
   }
+
+  console.log(appointmentsError);
 
   return (
     <AppShell>
@@ -88,9 +94,9 @@ const BookAppointmentPage = () => {
                 label: name,
                 description: specialty?.name ?? '',
                 image: photo,
-                value: name,
+                value: id,
               }))}
-              {...form.getInputProps('doctor')}
+              {...form.getInputProps('doctorId')}
             />
             <CustomSelect
               label="Select clinic"
@@ -101,9 +107,9 @@ const BookAppointmentPage = () => {
                 key: id,
                 label: doctorName,
                 description: `${city}, ${address}`,
-                value: doctorName,
+                value: id,
               }))}
-              {...form.getInputProps('clinic')}
+              {...form.getInputProps('clinicId')}
             />
             <Group grow noWrap={false} spacing="xs">
               <DateInput
@@ -115,7 +121,7 @@ const BookAppointmentPage = () => {
                 maw="100%"
                 required
                 clearable
-                {...form.getInputProps('date')}
+                {...form.getInputProps('reservationDate')}
               />
               <TimeInput
                 description="Appointment Time"
@@ -124,7 +130,7 @@ const BookAppointmentPage = () => {
                 miw={250}
                 maw="100%"
                 required
-                {...form.getInputProps('time')}
+                {...form.getInputProps('reservationTime')}
               />
             </Group>
             <Button fullWidth type="submit" loading={false}>
