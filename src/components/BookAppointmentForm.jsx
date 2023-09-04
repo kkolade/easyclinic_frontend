@@ -10,11 +10,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import camelToSnakeCase from 'utils/camelToSnakeCase';
 import { createAppointment } from '../redux/slices/appointmentsSlice';
+import { getClinics } from '../redux/slices/clinicsSlice';
 import { getDoctors } from '../redux/slices/doctorsSlice';
 import {
   selectAppointments,
   selectAppointmentsError,
   selectAppointmentsLoading,
+  selectClinics,
+  selectClinicsLoading,
   selectDoctors,
   selectDoctorsLoading,
 } from '../redux/store';
@@ -43,15 +46,25 @@ const BookAppointmentForm = () => {
   const appointments = useSelector(selectAppointments);
   const appointmentsLoading = useSelector(selectAppointmentsLoading);
   const appointmentsError = useSelector(selectAppointmentsError);
+  const clinics = useSelector(selectClinics);
+  const clinicsLoading = useSelector(selectClinicsLoading);
   const doctors = useSelector(selectDoctors);
   const doctorsLoading = useSelector(selectDoctorsLoading);
 
   const [appointmentsUpdated, setAppointmentsUpdated] = useState(false);
-  const [doctorClinics, setDoctorClinics] = useState([]);
 
   const handleSubmit = (values) => {
     dispatch(createAppointment(camelToSnakeCase(values)));
   };
+
+  useEffect(() => {
+    dispatch(getClinics());
+    dispatch(getDoctors());
+  }, [dispatch]);
+
+  useDidUpdate(() => {
+    setAppointmentsUpdated(true);
+  }, [appointments]);
 
   const form = useForm({
     initialValues: {
@@ -59,7 +72,7 @@ const BookAppointmentForm = () => {
       clinicId: null,
       reservationDate: new Date(),
       reservationTime: new Date().toLocaleTimeString('en-US', {
-        hourCycle: 'h23',
+        hour12: false,
         hour: '2-digit',
         minute: '2-digit',
       }),
@@ -78,29 +91,7 @@ const BookAppointmentForm = () => {
     },
   });
 
-  useDidUpdate(() => {
-    setAppointmentsUpdated(true);
-  }, [appointments]);
-
-  useEffect(() => {
-    dispatch(getDoctors());
-  }, [dispatch]);
-
-  useDidUpdate(() => {
-    const doctorClinics = doctors.find((doctor) => doctor.id === form.values.doctorId)?.clinics;
-    setDoctorClinics(
-      doctorClinics.map(({
-        id, name, city, address,
-      }) => ({
-        key: id,
-        label: name,
-        description: `${address}, ${city}`,
-        value: id,
-      })),
-    );
-  }, [form.values.doctorId]);
-
-  if (doctorsLoading) return <AppShellLoader />;
+  if (clinicsLoading || doctorsLoading) return <AppShellLoader />;
 
   return (
     <Flex direction="column" align="center" justify="center" rowGap="xl" h="100%">
@@ -134,7 +125,14 @@ const BookAppointmentForm = () => {
           <CustomSelect
             label="Select clinic"
             placeholder="Choose a Clinic"
-            data={doctorClinics}
+            data={clinics.map(({
+              id, name: doctorName, city, address,
+            }) => ({
+              key: id,
+              label: doctorName,
+              description: `${address}, ${city}`,
+              value: id,
+            }))}
             {...form.getInputProps('clinicId')}
           />
           <Group grow noWrap={false} spacing="xs">
