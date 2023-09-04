@@ -4,9 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 
 import ProtectedRoute from './components/ProtectedRoutes';
 import AddDoctorPage from './pages/AddDoctorPage';
+import BookAppointmentPage from './pages/BookAppointmentPage';
 import DeleteDoctorsPage from './pages/DeleteDoctorsPage';
 import DoctorDetailsPage from './pages/DoctorDetailsPage';
 import HomePage from './pages/HomePage';
+import MyAppointmentsPage from './pages/MyAppointmentsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
@@ -29,6 +31,10 @@ const App = () => {
       <Route element={<ProtectedRoute isAllowed={!user} />}>
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
+      </Route>
+      <Route element={<ProtectedRoute isAllowed={user} />}>
+        <Route path="/book-appointment" element={<BookAppointmentPage />} />
+        <Route path="/appointments" element={<MyAppointmentsPage />} />
       </Route>
       <Route element={<ProtectedRoute isAllowed={user?.role === 'admin'} />}>
         <Route path="/add-doctor" element={<AddDoctorPage />} />
