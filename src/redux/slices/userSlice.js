@@ -64,9 +64,9 @@ export const userSignin = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    user: null,
+    user: undefined,
     jwt: null,
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {
@@ -77,6 +77,7 @@ const userSlice = createSlice({
         state.user = user;
         state.jwt = jwt;
       }
+      state.loading = false;
     },
     userSignout: (state) => {
       state.user = null;

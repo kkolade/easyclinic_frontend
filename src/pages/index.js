@@ -1,0 +1,9 @@
+export { default as AddDoctorPage } from './AddDoctorPage';
+export { default as BookAppointmentPage } from './BookAppointmentPage';
+export { default as DeleteDoctorsPage } from './DeleteDoctorsPage';
+export { default as DoctorDetailsPage } from './DoctorDetailsPage';
+export { default as HomePage } from './HomePage';
+export { default as MyAppointmentsPage } from './MyAppointmentsPage';
+export { default as NotFoundPage } from './NotFoundPage';
+export { default as SigninPage } from './SigninPage';
+export { default as SignupPage } from './SignupPage';
