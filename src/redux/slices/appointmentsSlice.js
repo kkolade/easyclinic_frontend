@@ -1,59 +1,80 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const initialState = {
-  appointments: [],
-  status: 'idle',
-  error: null,
-};
+import { API_URL, LOCAL_STORAGE_JWT_KEY, LOCAL_STORAGE_USER_KEY } from 'utils/constants';
 
-const token = localStorage.getItem('token');
+const userId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY)).id;
+const authorizationToken = `bearer ${localStorage.getItem(LOCAL_STORAGE_JWT_KEY)}`;
+const appointmentsUrl = `${API_URL}/users/${userId}/reservations`;
 
-export const fetchAppointments = createAsyncThunk('appointments/fetchAppointments', async () => {
-  const response = await fetch('http://localhost:3000/api/v1/users/:user_id/reservations', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const data = await response.json();
-  return data;
-});
+export const getAppointments = createAsyncThunk(
+  'appointments/getAppointments',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(appointmentsUrl, {
+        headers: {
+          Authorization: authorizationToken,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 
-export const fetchDoctorDetails = createAsyncThunk(
-  'doctors/fetchDoctorDetails',
-  async (doctorId) => {
-    const response = await fetch(`http://localhost:3000/api/v1/doctors/${doctorId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    return data;
+export const createAppointment = createAsyncThunk(
+  'appointments/createAppointment',
+  async (appointmentData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(appointmentsUrl, appointmentData, {
+        headers: {
+          Authorization: authorizationToken,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   },
 );
 
 const appointmentsSlice = createSlice({
   name: 'appointments',
-  initialState,
-  reducers: {
-    addAppointment: (state, action) => {
-      state.appointments.push(action.payload);
-    },
+  initialState: {
+    appointments: [],
+    loading: false,
+    error: null,
   },
-  extraReducers: (builder) => {
+  extraReducers(builder) {
     builder
-      .addCase(fetchAppointments.pending, (state) => {
-        state.status = 'loading';
+      .addCase(getAppointments.pending, (state) => {
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(fetchAppointments.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+      .addCase(getAppointments.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
         state.appointments = action.payload;
       })
-      .addCase(fetchAppointments.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
+      .addCase(getAppointments.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(createAppointment.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createAppointment.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.appointments.push(action.payload);
+      })
+      .addCase(createAppointment.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export const { addAppointment } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer;
