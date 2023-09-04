@@ -42,7 +42,10 @@ export const deleteDoctor = createAsyncThunk(
           Authorization: `bearer ${getJwtFromLocalStorage()}`,
         },
       });
-      return response.data;
+      return {
+        id: doctorId,
+        message: response.data.message,
+      };
     } catch (error) {
       return rejectWithValue(error.response.statusText);
     }
@@ -81,6 +84,19 @@ const doctorsSlice = createSlice({
         state.doctors.push(action.payload);
       })
       .addCase(createDoctor.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteDoctor.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteDoctor.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.doctors = state.doctors.filter((doctor) => doctor.id !== action.payload.id);
+      })
+      .addCase(deleteDoctor.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

@@ -1,6 +1,6 @@
 import { Flex, Title } from '@mantine/core';
 import { useDocumentTitle } from '@mantine/hooks';
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppShell from 'components/AppShell';
@@ -21,20 +21,7 @@ const DeleteDoctorsPage = () => {
     dispatch(getDoctors());
   }, []);
 
-  // Use useMemo to memoize the transformed doctors
-  const transformedDoctors = useMemo(
-    () => doctors.map((doctor) => ({
-      id: doctor.id,
-      name: doctor.name,
-      avatar: doctor.photo,
-      specialty: doctor.specialty?.name,
-      email: doctor.user.email,
-      phone: doctor.user.phone_number,
-    })),
-    [doctors],
-  );
-
-  if (loading) return <AppShellLoader />;
+  if (!doctors && loading) return <AppShellLoader />;
 
   return (
     <AppShell>
@@ -42,7 +29,16 @@ const DeleteDoctorsPage = () => {
         <Title order={3} tt="uppercase" my="xl" align="center">
           All doctors
         </Title>
-        <DoctorsList data={transformedDoctors} />
+        <DoctorsList
+          data={doctors.map((doctor) => ({
+            id: doctor.id,
+            name: doctor.name,
+            avatar: doctor.photo,
+            specialty: doctor.specialty?.name,
+            email: doctor.user.email,
+            phone: doctor.user.phone_number,
+          }))}
+        />
       </Flex>
     </AppShell>
   );

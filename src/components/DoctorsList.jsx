@@ -3,8 +3,17 @@ import {
 } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+
+import { deleteDoctor } from '../redux/slices/doctorsSlice';
 
 export function DoctorsList({ data }) {
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(deleteDoctor(id));
+  };
+
   const rows = data.map((doctor) => (
     <tr key={doctor.id}>
       <td>
@@ -31,7 +40,7 @@ export function DoctorsList({ data }) {
           <ActionIcon>
             <IconPencil size="1rem" stroke={1.5} />
           </ActionIcon>
-          <ActionIcon color="red">
+          <ActionIcon color="red" onClick={() => handleDelete(doctor.id)}>
             <IconTrash size="1rem" stroke={1.5} />
           </ActionIcon>
         </Group>
