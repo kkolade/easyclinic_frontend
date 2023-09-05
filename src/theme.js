@@ -9,6 +9,7 @@ const themeOverride = {
     fontFamily: 'Raleway, sans-serif',
   },
   loader: 'bars',
+  primaryColor: 'indigo',
   components: {
     Button: {
       styles: {

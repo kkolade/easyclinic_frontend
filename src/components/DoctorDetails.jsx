@@ -80,7 +80,7 @@ const DoctorDetails = ({ data }) => (
     sx={{ height: '100%', placeItems: 'center' }}
   >
     <div>
-      <Avatar src={data.photo} alt={data.name} size={250} radius="50%" />
+      <Avatar src={data.photo} alt={data.name} size={300} radius="50%" />
     </div>
     <Box sx={{ textAlign: 'right' }}>
       <div>
