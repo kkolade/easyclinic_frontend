@@ -1,6 +1,6 @@
 import { Flex, Title } from '@mantine/core';
 import { useDocumentTitle } from '@mantine/hooks';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppShell from 'components/AppShell';
@@ -21,29 +21,29 @@ const MyAppointmentsPage = () => {
     dispatch(getAppointments());
   }, [dispatch]);
 
-  // Use useMemo to memoize the transformed appointments
-  const transformedAppointments = useMemo(() => appointments.map((appointment) => ({
-    id: appointment.id,
-    avatar: appointment.doctor.photo,
-    experience: appointment.doctor.experience_years,
-    clinic: appointment.clinic.name,
-    location: `${appointment.clinic.address}, ${appointment.clinic.city}`,
-    date: appointment.reservation_date,
-    time: new Date(appointment.reservation_time).toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-    }),
-  })), [appointments]);
-
   if (loading) return <AppShellLoader />;
 
   return (
     <AppShell>
       <Flex direction="column" align="center">
-        <Title order={3} tt="uppercase" mb="xl" align="center">
+        <Title order={3} tt="uppercase" my="xl" align="center">
           Appointments History
         </Title>
-        <AppointmentsList data={transformedAppointments} />
+        <AppointmentsList
+          data={appointments.map((appointment) => ({
+            id: appointment.id,
+            name: appointment.doctor.name,
+            avatar: appointment.doctor.photo,
+            experience: Number(appointment.doctor.experience_years) || 1,
+            clinic: appointment.clinic.name,
+            location: `${appointment.clinic.address}, ${appointment.clinic.city}`,
+            date: appointment.reservation_date,
+            time: new Date(appointment.reservation_time).toLocaleTimeString('en-US', {
+              hour: 'numeric',
+              minute: 'numeric',
+            }),
+          }))}
+        />
       </Flex>
     </AppShell>
   );

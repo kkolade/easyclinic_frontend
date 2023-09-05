@@ -1,26 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import camelToSnakeCase from 'utils/camelToSnakeCase';
+import { API_BASE_URL as BASE_URL } from 'utils/constants';
 import {
-  API_BASE_URL as BASE_URL,
-  LOCAL_STORAGE_JWT_KEY,
-  LOCAL_STORAGE_USER_KEY,
-} from 'utils/constants';
-
-const saveUserAndJwtToLocalStorage = (user, jwt) => {
-  localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(user));
-  localStorage.setItem(LOCAL_STORAGE_JWT_KEY, jwt);
-};
-
-const removeUserAndJwtFromLocalStorage = () => {
-  localStorage.removeItem(LOCAL_STORAGE_USER_KEY);
-  localStorage.removeItem(LOCAL_STORAGE_JWT_KEY);
-};
+  getUserFromLocalStorage,
+  removeUserAndJwtFromLocalStorage,
+  saveUserAndJwtToLocalStorage,
+} from 'utils/localStorageUserJwt';
 
 export const userSignup = createAsyncThunk('user/signup', async (userData, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${BASE_URL}/users`, camelToSnakeCase(userData), {
+    const response = await axios.post(`${BASE_URL}/users`, userData, {
       headers: {
         Accept: 'application/json',
       },
@@ -56,7 +46,7 @@ export const userSignin = createAsyncThunk(
         jwt: response.data.jwt,
       };
     } catch (error) {
-      return rejectWithValue(error.response.data.failure);
+      return rejectWithValue(error.response.data);
     }
   },
 );
@@ -71,7 +61,7 @@ const userSlice = createSlice({
   },
   reducers: {
     loadUserFromLocalStorage: (state) => {
-      const user = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY));
+      const user = getUserFromLocalStorage();
       const jwt = localStorage.getItem('jwt');
       if (user && jwt) {
         state.user = user;

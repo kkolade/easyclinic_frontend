@@ -24,7 +24,7 @@ const HomePage = () => {
     dispatch(getDoctors());
   }, [dispatch]);
 
-  if (loading) <AppShellLoader />;
+  if (loading) return <AppShellLoader />;
 
   return (
     <AppShell>
@@ -49,7 +49,7 @@ const HomePage = () => {
             loop
             styles={(theme) => ({
               control: {
-                backgroundColor: theme.colors.blue[2],
+                backgroundColor: theme.colors.indigo[3],
               },
             })}
           >

@@ -16,6 +16,7 @@ import { IconAlertCircle, IconChevronLeft } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import RouterLink from 'components/RouterLink';
+import camelToSnakeCase from 'utils/camelToSnakeCase';
 import { userSignup } from '../redux/slices/userSlice';
 import { selectUserError, selectUserLoading } from '../redux/store';
 
@@ -52,7 +53,7 @@ const SignupForm = () => {
   });
 
   const handleSubmit = (values) => {
-    dispatch(userSignup(values));
+    dispatch(userSignup(camelToSnakeCase(values)));
   };
 
   return (

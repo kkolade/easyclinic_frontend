@@ -7,13 +7,16 @@ import { useDidUpdate } from '@mantine/hooks';
 import { IconArrowRight, IconCalendarEvent, IconClock } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 
+import camelToSnakeCase from 'utils/camelToSnakeCase';
 import { createAppointment } from '../redux/slices/appointmentsSlice';
 import { getClinics } from '../redux/slices/clinicsSlice';
 import { getDoctors } from '../redux/slices/doctorsSlice';
 import {
   selectAppointments,
   selectAppointmentsError,
+  selectAppointmentsLoading,
   selectClinics,
   selectClinicsLoading,
   selectDoctors,
@@ -38,10 +41,14 @@ const AppointmentBookedAlert = () => (
   </AlertSuccess>
 );
 
-const BookAppointmentForm = () => {
+const AppointmentForm = () => {
   const dispatch = useDispatch();
 
+  const [searchParams] = useSearchParams();
+  const doctorIdParam = searchParams.get('doctorId');
+
   const appointments = useSelector(selectAppointments);
+  const appointmentsLoading = useSelector(selectAppointmentsLoading);
   const appointmentsError = useSelector(selectAppointmentsError);
   const clinics = useSelector(selectClinics);
   const clinicsLoading = useSelector(selectClinicsLoading);
@@ -51,7 +58,7 @@ const BookAppointmentForm = () => {
   const [appointmentsUpdated, setAppointmentsUpdated] = useState(false);
 
   const handleSubmit = (values) => {
-    dispatch(createAppointment(values));
+    dispatch(createAppointment(camelToSnakeCase(values)));
   };
 
   useEffect(() => {
@@ -65,7 +72,7 @@ const BookAppointmentForm = () => {
 
   const form = useForm({
     initialValues: {
-      doctorId: null,
+      doctorId: Number(doctorIdParam) || null,
       clinicId: null,
       reservationDate: new Date(),
       reservationTime: new Date().toLocaleTimeString('en-US', {
@@ -127,7 +134,7 @@ const BookAppointmentForm = () => {
             }) => ({
               key: id,
               label: doctorName,
-              description: `${city}, ${address}`,
+              description: `${address}, ${city}`,
               value: id,
             }))}
             {...form.getInputProps('clinicId')}
@@ -154,7 +161,7 @@ const BookAppointmentForm = () => {
               {...form.getInputProps('reservationTime')}
             />
           </Group>
-          <Button fullWidth type="submit" loading={false}>
+          <Button fullWidth type="submit" loading={appointmentsLoading}>
             Book appointment
           </Button>
         </Flex>
@@ -163,4 +170,4 @@ const BookAppointmentForm = () => {
   );
 };
 
-export default BookAppointmentForm;
+export default AppointmentForm;

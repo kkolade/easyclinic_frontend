@@ -1,20 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import camelToSnakeCase from 'utils/camelToSnakeCase';
-import { API_URL, LOCAL_STORAGE_JWT_KEY, LOCAL_STORAGE_USER_KEY } from 'utils/constants';
-
-const userId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY))?.id;
-const authorizationToken = `bearer ${localStorage.getItem(LOCAL_STORAGE_JWT_KEY)}`;
-const appointmentsUrl = `${API_URL}/users/${userId}/reservations`;
+import { API_URL } from 'utils/constants';
+import { getJwtFromLocalStorage, getUserFromLocalStorage } from 'utils/localStorageUserJwt';
 
 export const getAppointments = createAsyncThunk(
   'appointments/getAppointments',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(appointmentsUrl, {
+      const user = getUserFromLocalStorage();
+      const response = await axios.get(`${API_URL}/users/${user.id}/reservations`, {
         headers: {
-          Authorization: authorizationToken,
+          Authorization: `bearer ${getJwtFromLocalStorage()}`,
         },
       });
       return response.data;
@@ -28,11 +25,16 @@ export const createAppointment = createAsyncThunk(
   'appointments/createAppointment',
   async (appointmentData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(appointmentsUrl, camelToSnakeCase(appointmentData), {
-        headers: {
-          Authorization: authorizationToken,
+      const user = getUserFromLocalStorage();
+      const response = await axios.post(
+        `${API_URL}/users/${user.id}/reservations`,
+        appointmentData,
+        {
+          headers: {
+            Authorization: `bearer ${getJwtFromLocalStorage()}`,
+          },
         },
-      });
+      );
       return response.data;
     } catch (error) {
       const errorMessages = error.response.data.errors.map((e, i) => ({

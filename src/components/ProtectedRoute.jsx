@@ -12,7 +12,7 @@ ProtectedRoute.propTypes = {
 };
 
 ProtectedRoute.defaultProps = {
-  redirectPath: '/',
+  redirectPath: '/signin',
 };
 
 export default ProtectedRoute;
