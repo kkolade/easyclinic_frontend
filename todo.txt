@@ -1,0 +1,5 @@
+
+notification
+create details page (/user/:id route)
+fix renderer wrapper and write snapshot/unit tests
+create snapshot tests
