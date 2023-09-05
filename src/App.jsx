@@ -33,7 +33,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/doctors/:id" element={<DoctorDetailsPage />} />
-      <Route element={<ProtectedRoute isAllowed={!user} />}>
+      <Route element={<ProtectedRoute redirectPath="/" isAllowed={!user} />}>
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Route>
