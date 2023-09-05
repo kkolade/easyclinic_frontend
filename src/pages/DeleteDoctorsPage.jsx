@@ -1,13 +1,14 @@
 import { Flex, Title } from '@mantine/core';
-import { useDocumentTitle } from '@mantine/hooks';
+import { useDidUpdate, useDocumentTitle } from '@mantine/hooks';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppShell from 'components/AppShell';
 import AppShellLoader from 'components/AppShellLoader';
 import DoctorsList from 'components/DoctorsList';
+import showNotification from '../notifications';
 import { getDoctors } from '../redux/slices/doctorsSlice';
-import { selectAppointmentsLoading, selectDoctors } from '../redux/store';
+import { selectAppointmentsLoading, selectDoctors, selectDoctorsError } from '../redux/store';
 
 const DeleteDoctorsPage = () => {
   useDocumentTitle('Delete Doctors - EasyClinic');
@@ -16,10 +17,17 @@ const DeleteDoctorsPage = () => {
 
   const doctors = useSelector(selectDoctors);
   const loading = useSelector(selectAppointmentsLoading);
+  const error = useSelector(selectDoctorsError);
+
+  useDidUpdate(() => {
+    showNotification({ type: 'success', message: 'Doctor deleted successfully' });
+  }, [doctors.length]);
 
   useEffect(() => {
     dispatch(getDoctors());
   }, []);
+
+  if (error) return showNotification({ type: 'error', message: error });
 
   if (!doctors && loading) return <AppShellLoader />;
 
