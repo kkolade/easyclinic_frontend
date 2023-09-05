@@ -3,6 +3,7 @@ import {
   Badge,
   Box,
   Center,
+  MediaQuery,
   SimpleGrid,
   Space,
   Text,
@@ -80,9 +81,14 @@ const DoctorDetails = ({ data }) => (
     sx={{ height: '100%', placeItems: 'center' }}
   >
     <div>
-      <Avatar src={data.photo} alt={data.name} size={300} radius="50%" />
+      <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+        <Avatar src={data.photo} alt={data.name} size={250} radius="50%" />
+      </MediaQuery>
+      <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+        <Avatar src={data.photo} alt={data.name} size={300} radius="50%" />
+      </MediaQuery>
     </div>
-    <Box sx={{ textAlign: 'right' }}>
+    <Box maw={600} sx={{ textAlign: 'right' }}>
       <div>
         <Title>{data.name}</Title>
         <Badge>{data.specialty?.name || 'General Practitioner'}</Badge>
