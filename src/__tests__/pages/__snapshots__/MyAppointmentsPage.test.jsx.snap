@@ -1,0 +1,303 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyAppointmentsPage should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="mantine-AppShell-root mantine-1udmbix"
+  >
+    <div
+      class="mantine-hr6aor mantine-AppShell-body"
+    >
+      <nav
+        class="mantine-Navbar-root mantine-13ge6fs"
+        data-hidden="true"
+      >
+        <div
+          class="mantine-qyxvtq"
+        >
+          <div
+            class="mantine-Image-root mantine-lgo8bz"
+            style="width: 12.5rem;"
+          >
+            <figure
+              class="mantine-qenwvq mantine-Image-figure"
+            >
+              <div
+                class="mantine-1iugybl mantine-Image-imageWrapper"
+              >
+                <img
+                  alt="EasyClinic Logo"
+                  class="mantine-1i6l9bv mantine-Image-image"
+                  src="/logo.png"
+                  style="object-fit: cover; width: 12.5rem; height: auto;"
+                />
+              </div>
+            </figure>
+          </div>
+        </div>
+        <div
+          class="mantine-hzudtq"
+        >
+          <div>
+            <a
+              class="mantine-UnstyledButton-root mantine-NavLink-root mantine-165mgsf"
+              data-active="true"
+              href="/"
+            >
+              <span
+                class="mantine-1l4mhad mantine-NavLink-icon"
+              >
+                <svg
+                  class="tabler-icon tabler-icon-home"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 12l-2 0l9 -9l9 9l-2 0"
+                  />
+                  <path
+                    d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+                  />
+                  <path
+                    d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+                  />
+                </svg>
+              </span>
+              <span
+                class="mantine-dstkpx mantine-NavLink-body"
+              >
+                <span
+                  class="mantine-Text-root mantine-NavLink-label mantine-1sdv04i"
+                >
+                  Home
+                </span>
+                <span
+                  class="mantine-Text-root mantine-NavLink-description mantine-h4oguy"
+                  data-active="true"
+                />
+              </span>
+            </a>
+            <div
+              aria-hidden="true"
+              class="mantine-1avyp1d"
+              style="box-sizing: border-box; display: none; height: 0px; overflow: hidden;"
+            >
+              <div
+                style="opacity: 0; transition: opacity 200ms ease;"
+              >
+                <div
+                  class="mantine-1c04k7q mantine-NavLink-children"
+                />
+              </div>
+            </div>
+            <a
+              class="mantine-UnstyledButton-root mantine-NavLink-root mantine-165mgsf"
+              href="/signin"
+            >
+              <span
+                class="mantine-1l4mhad mantine-NavLink-icon"
+              >
+                <svg
+                  class="tabler-icon tabler-icon-login"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+                  />
+                  <path
+                    d="M20 12h-13l3 -3m0 6l-3 -3"
+                  />
+                </svg>
+              </span>
+              <span
+                class="mantine-dstkpx mantine-NavLink-body"
+              >
+                <span
+                  class="mantine-Text-root mantine-NavLink-label mantine-1sdv04i"
+                >
+                  Sign in
+                </span>
+                <span
+                  class="mantine-Text-root mantine-NavLink-description mantine-h4oguy"
+                />
+              </span>
+            </a>
+            <div
+              aria-hidden="true"
+              class="mantine-1avyp1d"
+              style="box-sizing: border-box; display: none; height: 0px; overflow: hidden;"
+            >
+              <div
+                style="opacity: 0; transition: opacity 200ms ease;"
+              >
+                <div
+                  class="mantine-1c04k7q mantine-NavLink-children"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mantine-khtkeg"
+        >
+          <div
+            class="mantine-Text-root mantine-1p5v0xp"
+          >
+            © 2023 EasyClinic
+          </div>
+        </div>
+      </nav>
+      <main
+        class="mantine-bzbzc1 mantine-AppShell-main"
+      >
+        <div
+          class="mantine-16jzalw"
+        >
+          <svg
+            class="mantine-1avyp1d"
+            fill="#4c6ef5"
+            role="presentation"
+            style="width: 2.25rem;"
+            viewBox="0 0 135 140"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              height="120"
+              rx="6"
+              width="15"
+              y="10"
+            >
+              <animate
+                attributeName="height"
+                begin="0.5s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="120;110;100;90;80;70;60;50;40;140;120"
+              />
+              <animate
+                attributeName="y"
+                begin="0.5s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="10;15;20;25;30;35;40;45;50;0;10"
+              />
+            </rect>
+            <rect
+              height="120"
+              rx="6"
+              width="15"
+              x="30"
+              y="10"
+            >
+              <animate
+                attributeName="height"
+                begin="0.25s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="120;110;100;90;80;70;60;50;40;140;120"
+              />
+              <animate
+                attributeName="y"
+                begin="0.25s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="10;15;20;25;30;35;40;45;50;0;10"
+              />
+            </rect>
+            <rect
+              height="140"
+              rx="6"
+              width="15"
+              x="60"
+            >
+              <animate
+                attributeName="height"
+                begin="0s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="120;110;100;90;80;70;60;50;40;140;120"
+              />
+              <animate
+                attributeName="y"
+                begin="0s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="10;15;20;25;30;35;40;45;50;0;10"
+              />
+            </rect>
+            <rect
+              height="120"
+              rx="6"
+              width="15"
+              x="90"
+              y="10"
+            >
+              <animate
+                attributeName="height"
+                begin="0.25s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="120;110;100;90;80;70;60;50;40;140;120"
+              />
+              <animate
+                attributeName="y"
+                begin="0.25s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="10;15;20;25;30;35;40;45;50;0;10"
+              />
+            </rect>
+            <rect
+              height="120"
+              rx="6"
+              width="15"
+              x="120"
+              y="10"
+            >
+              <animate
+                attributeName="height"
+                begin="0.5s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="120;110;100;90;80;70;60;50;40;140;120"
+              />
+              <animate
+                attributeName="y"
+                begin="0.5s"
+                calcMode="linear"
+                dur="1s"
+                repeatCount="indefinite"
+                values="10;15;20;25;30;35;40;45;50;0;10"
+              />
+            </rect>
+          </svg>
+        </div>
+      </main>
+    </div>
+  </div>
+</DocumentFragment>
+`;
