@@ -26,6 +26,7 @@ export const selectClinicsError = (state) => state.clinics.error;
 
 // doctorsReducer selectors
 export const selectDoctors = (state) => state.doctors.doctors;
+export const selectSelectedDoctor = (state) => state.doctors.selectedDoctor;
 export const selectDoctorsLoading = (state) => state.doctors.loading;
 export const selectDoctorsError = (state) => state.doctors.error;
 

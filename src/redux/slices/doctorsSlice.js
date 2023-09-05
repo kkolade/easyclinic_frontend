@@ -13,6 +13,18 @@ export const getDoctors = createAsyncThunk('doctors/getDoctors', async (_, { rej
   }
 });
 
+export const getDoctorById = createAsyncThunk(
+  'doctors/getDoctorById',
+  async (doctorId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${API_URL}/doctors/${doctorId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.statusText);
+    }
+  },
+);
+
 export const createDoctor = createAsyncThunk(
   'doctors/createDoctor',
   async (doctorData, { rejectWithValue }) => {
@@ -56,6 +68,7 @@ const doctorsSlice = createSlice({
   name: 'doctors',
   initialState: {
     doctors: [],
+    selectedDoctor: null,
     loading: false,
     error: null,
   },
@@ -71,6 +84,19 @@ const doctorsSlice = createSlice({
         state.doctors = action.payload;
       })
       .addCase(getDoctors.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getDoctorById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getDoctorById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.selectedDoctor = action.payload;
+      })
+      .addCase(getDoctorById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
