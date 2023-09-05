@@ -31,6 +31,8 @@
 
 **EasyClinic** is a web application that allows users to book doctor appointments, browse a list of available doctors, and keep track of their booked appointments. Admins can also create and remove doctors.
 
+![EasyClinic Screenshot](./easyclinic.png)
+
 ### Server
 
 This is the client-side implementation of the project. The server code can be found [here](https://github.com/oovillagran/final-capstone-back-end/).
