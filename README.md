@@ -64,7 +64,7 @@ This is the client-side implementation of the project. The server code can be fo
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Coming soon...](#)
+- [EasyClinic Live Demo](https://easyclinic-client.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
