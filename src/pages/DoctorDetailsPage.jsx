@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 import AppShell from 'components/AppShell';
 import AppShellLoader from 'components/AppShellLoader';
 import DoctorDetails from 'components/DoctorDetails';
+import { clearSelectedDoctor, getDoctorById } from '../redux/slices/doctorsSlice';
 import { selectDoctorsError, selectSelectedDoctor } from '../redux/store';
-import { getDoctorById } from '../redux/slices/doctorsSlice';
 
 const DoctorDetailsPage = () => {
   useDocumentTitle('Doctor Details - EasyClinic');
@@ -20,6 +20,8 @@ const DoctorDetailsPage = () => {
 
   useEffect(() => {
     dispatch(getDoctorById(id));
+    // clear selected doctor on unmount
+    return () => dispatch(clearSelectedDoctor());
   }, [dispatch, id]);
 
   if (error) return <AppShell>{error}</AppShell>;

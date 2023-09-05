@@ -72,6 +72,11 @@ const doctorsSlice = createSlice({
     loading: false,
     error: null,
   },
+  reducers: {
+    clearSelectedDoctor: (state) => {
+      state.selectedDoctor = null;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getDoctors.pending, (state) => {
@@ -128,5 +133,7 @@ const doctorsSlice = createSlice({
       });
   },
 });
+
+export const { clearSelectedDoctor } = doctorsSlice.actions;
 
 export default doctorsSlice.reducer;
