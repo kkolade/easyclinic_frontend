@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 import { deleteDoctor } from '../redux/slices/doctorsSlice';
 
-export function DoctorsList({ data }) {
+export const DoctorsList = ({ data }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
@@ -65,7 +65,7 @@ export function DoctorsList({ data }) {
       </Table>
     </ScrollArea>
   );
-}
+};
 
 DoctorsList.propTypes = {
   data: PropTypes.arrayOf(

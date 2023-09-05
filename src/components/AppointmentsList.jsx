@@ -3,7 +3,7 @@ import {
 } from '@mantine/core';
 import PropTypes from 'prop-types';
 
-export function AppointmentsList({ data }) {
+export const AppointmentsList = ({ data }) => {
   const rows = data.map((doctor) => (
     <tr key={doctor.id}>
       <td>
@@ -52,7 +52,7 @@ export function AppointmentsList({ data }) {
       </Table>
     </ScrollArea>
   );
-}
+};
 
 AppointmentsList.propTypes = {
   data: PropTypes.arrayOf(
