@@ -28,7 +28,7 @@ const MyAppShell = ({ children }) => {
   return (
     <AppShell
       navbar={(
-        <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }} py="md">
+        <Navbar hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 250, lg: 300 }} py="md">
           {!smallScreen && (
             <Navbar.Section mb="md">
               <Image
