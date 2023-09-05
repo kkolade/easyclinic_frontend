@@ -1,59 +1,63 @@
 import {
-  Avatar, Box, SimpleGrid, Text, Title,
+  Avatar, SimpleGrid, Text, Title, createStyles,
 } from '@mantine/core';
 import PropTypes from 'prop-types';
 
-const DoctorTable = ({ data }) => (
-  <Box
-    component="table"
-    my="xl"
-    sx={(theme) => ({
-      fontWeight: 600,
-      width: '100%',
-      tr: {},
-      td: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: `${theme.spacing.xs} ${theme.spacing.md}`,
-      },
-      tbody: {
-        'tr:nth-child(even)': {
-          td: {
-            backgroundColor: theme.colors.gray[0],
-          },
-        },
-        'tr:nth-child(odd)': {
-          td: {
-            backgroundColor: theme.colors.gray[2],
-          },
+const useStyles = createStyles((theme) => ({
+  table: {
+    fontWeight: 600,
+    width: '100%',
+    margin: `${theme.spacing.xl} auto`,
+    td: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+    },
+    tbody: {
+      'tr:nth-of-type(even)': {
+        td: {
+          backgroundColor: theme.colors.gray[0],
         },
       },
-    })}
-  >
-    <tbody>
-      <tr>
-        <td>
-          Name
-          <span>{data.name}</span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Phone
-          {' '}
-          <span>{data.user.phone_number}</span>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Email
-          {' '}
-          <span>{data.user.email}</span>
-        </td>
-      </tr>
-    </tbody>
-  </Box>
-);
+      'tr:nth-of-type(odd)': {
+        td: {
+          backgroundColor: theme.colors.gray[2],
+        },
+      },
+    },
+  },
+}));
+
+const DoctorTable = ({ data }) => {
+  const { classes } = useStyles();
+
+  return (
+    <table className={classes.table}>
+      <tbody>
+        <tr>
+          <td>
+            Name
+            <span>{data.name}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Phone
+            {' '}
+            <span>{data.user.phone_number}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Email
+            {' '}
+            <span>{data.user.email}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
 
 const DoctorDetails = ({ data }) => (
   <SimpleGrid
