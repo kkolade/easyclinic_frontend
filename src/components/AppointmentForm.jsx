@@ -7,6 +7,7 @@ import { useDidUpdate } from '@mantine/hooks';
 import { IconArrowRight, IconCalendarEvent, IconClock } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 
 import camelToSnakeCase from 'utils/camelToSnakeCase';
 import { createAppointment } from '../redux/slices/appointmentsSlice';
@@ -43,6 +44,9 @@ const AppointmentBookedAlert = () => (
 const AppointmentForm = () => {
   const dispatch = useDispatch();
 
+  const [searchParams] = useSearchParams();
+  const doctorIdParam = searchParams.get('doctorId');
+
   const appointments = useSelector(selectAppointments);
   const appointmentsLoading = useSelector(selectAppointmentsLoading);
   const appointmentsError = useSelector(selectAppointmentsError);
@@ -68,7 +72,7 @@ const AppointmentForm = () => {
 
   const form = useForm({
     initialValues: {
-      doctorId: null,
+      doctorId: Number(doctorIdParam) || null,
       clinicId: null,
       reservationDate: new Date(),
       reservationTime: new Date().toLocaleTimeString('en-US', {

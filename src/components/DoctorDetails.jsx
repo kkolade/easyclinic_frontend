@@ -96,7 +96,7 @@ const DoctorDetails = ({ data }) => (
 
       <div>
         <Space h="sm" />
-        <RouterButton to="/book-appointment" radius="xl" size="md">
+        <RouterButton to={`/book-appointment?doctorId=${data.id}`} radius="xl" size="md">
           <Center inline>
             <IconCalendarCheck />
             <Text ml={rem(4)}>Book now</Text>
@@ -124,6 +124,7 @@ const DoctorDetails = ({ data }) => (
 
 const DoctorDataProp = {
   data: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
     bio: PropTypes.string.isRequired,
