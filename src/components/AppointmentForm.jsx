@@ -76,7 +76,7 @@ const AppointmentForm = () => {
       clinicId: null,
       reservationDate: new Date(),
       reservationTime: new Date().toLocaleTimeString('en-US', {
-        hour12: false,
+        hourCycle: 'h23',
         hour: '2-digit',
         minute: '2-digit',
       }),
@@ -143,7 +143,7 @@ const AppointmentForm = () => {
             <DateInput
               description="Appointment Date"
               icon={<IconCalendarEvent />}
-              maxDate={new Date()}
+              minDate={new Date()}
               withAsterisk={false}
               miw={250}
               maw="100%"
