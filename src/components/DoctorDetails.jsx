@@ -1,7 +1,20 @@
 import {
-  Avatar, Badge, Box, SimpleGrid, Space, Text, Title, createStyles,
+  Avatar,
+  Badge,
+  Box,
+  Center,
+  SimpleGrid,
+  Space,
+  Text,
+  Title,
+  createStyles,
+  rem,
 } from '@mantine/core';
+import { IconCalendarCheck, IconChevronRight } from '@tabler/icons-react';
 import PropTypes from 'prop-types';
+
+import RouterButton from './RouterButton';
+import RouterLink from './RouterLink';
 
 const useStyles = createStyles((theme) => ({
   table: {
@@ -70,11 +83,41 @@ const DoctorDetails = ({ data }) => (
       <Avatar src={data.photo} alt={data.name} size={250} radius="50%" />
     </div>
     <Box sx={{ textAlign: 'right' }}>
-      <Title>{data.name}</Title>
-      <Badge>{data.specialty?.name || 'General Practitioner'}</Badge>
-      <Space h="sm" />
-      <Text c="dark.3">{data.bio}</Text>
-      <DoctorTable data={data} />
+      <div>
+        <Title>{data.name}</Title>
+        <Badge>{data.specialty?.name || 'General Practitioner'}</Badge>
+      </div>
+
+      <div>
+        <Space h="sm" />
+        <Text c="dark.3">{data.bio}</Text>
+        <DoctorTable data={data} />
+      </div>
+
+      <div>
+        <Space h="sm" />
+        <RouterButton to="/book-appointment" radius="xl" size="md">
+          <Center inline>
+            <IconCalendarCheck />
+            <Text ml={rem(4)}>Book now</Text>
+          </Center>
+        </RouterButton>
+      </div>
+
+      <div>
+        <Space h="xl" />
+        <RouterLink to="/">
+          <Center
+            inline
+            sx={(theme) => ({
+              color: theme.colors.blue[8],
+            })}
+          >
+            Find more doctors
+            <Box component={IconChevronRight} size={rem(20)} />
+          </Center>
+        </RouterLink>
+      </div>
     </Box>
   </SimpleGrid>
 );
