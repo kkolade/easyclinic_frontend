@@ -139,7 +139,8 @@ To run the project, execute the following command:
 - GitHub: [@Mylo16](https://github.com/Mylo16)
 - LinkedIn: [ericopokuantwi](https://www.linkedin.com/in/ericopokuantwi/)
 - Twitter: [@EricAntwi384](https://twitter.com/EricAntwi384)
-  👤 **Oscar Villagran**
+
+👤 **Oscar Villagran**
 
 - GitHub: [@oovillagran](https://github.com/oovillagran)
 - LinkedIn: [Oscar Villagran](https://www.linkedin.com/in/oovillagran/)
